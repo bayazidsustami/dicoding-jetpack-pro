@@ -1,6 +1,7 @@
-package com.dicoding.submission.jetpack.data
+package com.dicoding.submission.jetpack.data.tvShows
 
-data class FilmModel(
+data class TvShowsEntity(
+        val id: String,
         val posterPath: String,
         val overview: String,
         val title: String,
