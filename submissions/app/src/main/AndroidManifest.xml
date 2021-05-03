@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DicodingJetpack">
-        <activity android:name=".ui.mainUI.detail.DetailTvShowActivity"></activity>
-        <activity android:name=".ui.mainUI.detail.DetailMovieActivity" />
+        <activity android:name=".ui.mainUI.detail.tvShow.DetailTvShowActivity"></activity>
+        <activity android:name=".ui.mainUI.detail.movie.DetailMovieActivity" />
         <activity android:name=".ui.mainUI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

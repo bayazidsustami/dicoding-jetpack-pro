@@ -1,4 +1,4 @@
-package com.dicoding.submission.jetpack.ui.mainUI.detail
+package com.dicoding.submission.jetpack.ui.mainUI.detail.tvShow
 
 import com.dicoding.submission.jetpack.databinding.ActivityDetailTvShowBinding
 import com.dicoding.submission.jetpack.ui.baseUI.BaseActivity
