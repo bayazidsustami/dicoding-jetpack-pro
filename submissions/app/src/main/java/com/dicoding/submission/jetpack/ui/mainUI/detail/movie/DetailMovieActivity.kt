@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.databinding.ActivityDetailMovieBinding
 import com.dicoding.submission.jetpack.ui.baseUI.BaseActivity
+import com.dicoding.submission.jetpack.utils.circularProgress
 
 class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(
         ActivityDetailMovieBinding::inflate
@@ -25,6 +26,7 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(
             viewPoster.run {
                 Glide.with(this@DetailMovieActivity)
                     .load(intent?.posterPath)
+                    .placeholder(this@DetailMovieActivity.circularProgress())
                     .into(imgPoster)
                 tvTitle.text = dataDetail.title
             }

@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.databinding.ActivityDetailTvShowBinding
 import com.dicoding.submission.jetpack.ui.baseUI.BaseActivity
+import com.dicoding.submission.jetpack.utils.circularProgress
 
 class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
     ActivityDetailTvShowBinding::inflate
@@ -16,11 +17,17 @@ class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
         if (intent != null){
             viewModel.setSelectedTvShow(intent.id)
 
+            supportActionBar?.run {
+                title = intent.title
+                setDisplayHomeAsUpEnabled(true)
+            }
+
             val detail = viewModel.getDetailTvShow()
             bind.run {
                 viewPoster.tvTitle.text = detail.title
                 Glide.with(this@DetailTvShowActivity)
                     .load(detail.posterPath)
+                    .placeholder(this@DetailTvShowActivity.circularProgress())
                     .into(bind.viewPoster.imgPoster)
                 viewDetail.tvTitle.text = detail.title
                 viewDetail.tvStatus.text = detail.status
@@ -30,6 +37,11 @@ class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
                 tvHomePage.text = detail.homepage
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     companion object{
