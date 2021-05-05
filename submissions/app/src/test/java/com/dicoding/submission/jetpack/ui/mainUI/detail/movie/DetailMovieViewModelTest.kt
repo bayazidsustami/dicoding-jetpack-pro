@@ -9,10 +9,10 @@ import org.junit.Test
 class DetailMovieViewModelTest {
 
     private lateinit var viewModel: DetailMovieViewModel
-    private val dummyData = DataDummy.generateMovieData()[0]
+    private val dummyData = DataDummy.generateMovieData()[2]
     private val movieId = dummyData.id
 
-    private val dataDetail = DataDummy.generateDetailMovie(movieId)[0]
+    private val dataDetail = DataDummy.generateDetailMovie()[2]
 
     @Before
     fun setUp() {
