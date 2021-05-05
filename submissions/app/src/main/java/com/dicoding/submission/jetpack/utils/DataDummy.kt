@@ -2,6 +2,7 @@ package com.dicoding.submission.jetpack.utils
 
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
+import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 
 object DataDummy {
@@ -263,5 +264,117 @@ object DataDummy {
             )
         )
         return tvShows
+    }
+
+    fun generateDetailTvShow(): List<DetailTvShowsEntity>{
+        val detailTvShow = mutableListOf<DetailTvShowsEntity>()
+
+        detailTvShow.add(DetailTvShowsEntity(
+            "88396",
+            "$BASE_POSTER_PATH/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
+            "https://www.disneyplus.com/series/the-falcon-and-the-winter-soldier/4gglDBMx8icA",
+            "The Falcon and the Winter Soldier",
+            "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
+            "Ended",
+            "6"
+        ))
+        detailTvShow.add(
+            DetailTvShowsEntity(
+            "95557",
+            "$BASE_POSTER_PATH/yDWJYRAwMNKbIYT8ZB33qy84uzO.jpg",
+            "https://www.amazon.com/dp/B08WJP55PR",
+            "Invincible",
+            "Mark must prove he's become the hero he's always wanted to be by stopping an unstoppable force.",
+                "Returning Series",
+                "8"
+        )
+        )
+        detailTvShow.add(
+            DetailTvShowsEntity(
+            "71712",
+                "$BASE_POSTER_PATH/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
+                "http://abc.go.com/shows/the-good-doctor",
+                "The Good Doctor",
+                "A young surgeon with Savant syndrome is recruited into the surgical unit of a prestigious hospital. The question will arise: can a person who doesn't have the ability to relate to people actually save their lives",
+                "Returning Series",
+                "17"
+        )
+        )
+        detailTvShow.add(DetailTvShowsEntity(
+            "60735",
+            "$BASE_POSTER_PATH/lJA2RCMfsWoskqlQhXPSLFQGXEJ.jpg",
+            "http://www.cwtv.com/shows/the-flash/",
+            "The Flash",
+            "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \\\"meta-human\\\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
+            "Returning Series",
+            "9"
+        ))
+
+        detailTvShow.add(
+            DetailTvShowsEntity(
+            "79008",
+            "$BASE_POSTER_PATH/34FaY8qpjBAVysSfrJ1l7nrAQaD.jpg",
+            "https://www.netflix.com/title/80191236",
+            "Luis Miguel: La Serie",
+            "The series dramatizes the life story of Mexican superstar singer Luis Miguel, who has captivated audiences in Latin America and beyond for decades.",
+            "Returning Series",
+            "8"
+        )
+        )
+        detailTvShow.add(
+            DetailTvShowsEntity(
+            "1416",
+                "$BASE_POSTER_PATH/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
+                "http://abc.go.com/shows/greys-anatomy",
+                "Grey's Anatomy",
+                "Follows the personal and professional lives of a group of doctors at Seattle’s Grey Sloan Memorial Hospital.",
+                "Returning Series",
+                "16"
+        )
+        )
+        detailTvShow.add(
+            DetailTvShowsEntity(
+            "120587",
+            "$BASE_POSTER_PATH/Q1ZYG3kDS8iVIHOYOJ9NQmV0q7.jpg",
+            "https://www.netflix.com/title/81215555",
+            "Haunted: Latinoamérica",
+            "Real people's terrifying tales of the chilling, unexplained and paranormal come to life with dramatic reenactments in this reality series.",
+            "Returning Series",
+            "5"
+        )
+        )
+        detailTvShow.add(DetailTvShowsEntity(
+            "63174",
+            "$BASE_POSTER_PATH/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg",
+            "https://www.netflix.com/title/80057918",
+            "Lucifer",
+            "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape.",
+            "Returning Series",
+            "10"
+        ))
+        detailTvShow.add(
+            DetailTvShowsEntity(
+            "69050",
+            "$BASE_POSTER_PATH/wRbjVBdDo5qHAEOVYoMWpM58FSA.jpg",
+            "http://www.cwtv.com/shows/riverdale/",
+            "Riverdale",
+            "Set in the present, the series offers a bold, subversive take on Archie, Betty, Veronica and their friends, exploring the surreality of small-town life, the darkness and weirdness bubbling beneath Riverdale’s wholesome facade.",
+            "Returning Series",
+            "11"
+        )
+        )
+        detailTvShow.add(
+            DetailTvShowsEntity(
+            "65820",
+            "$BASE_POSTER_PATH/r8ODGmfNbZQlNhiJl2xQENE2jsk.jpg",
+            "http://www.syfy.com/vanhelsing",
+            "Van Helsing",
+            "Vanessa Helsing, the daughter of famous vampire hunter and Dracula nemesis Abraham Van Helsing is resurrected five years in the future to find out that vampires have taken over the world and that she possesses unique power over them. She is humanity’s last hope to lead an offensive to take back what has been lost.",
+            "Returning Series",
+            "4"
+        )
+        )
+
+        return detailTvShow
     }
 }
