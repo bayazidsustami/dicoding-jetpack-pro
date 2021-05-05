@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.databinding.ActivityDetailTvShowBinding
 import com.dicoding.submission.jetpack.ui.baseUI.BaseActivity
+import com.dicoding.submission.jetpack.utils.Commons
 import com.dicoding.submission.jetpack.utils.circularProgress
 
 class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
@@ -35,6 +36,10 @@ class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
 
                 tvDescription.text = detail.overview
                 tvHomePage.text = detail.homepage
+
+                tvHomePage.setOnClickListener {
+                    Commons.openBrowser(this@DetailTvShowActivity, detail.homepage)
+                }
             }
         }
     }

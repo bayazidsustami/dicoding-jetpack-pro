@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.databinding.ActivityDetailMovieBinding
 import com.dicoding.submission.jetpack.ui.baseUI.BaseActivity
+import com.dicoding.submission.jetpack.utils.Commons
 import com.dicoding.submission.jetpack.utils.circularProgress
 
 class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(
@@ -37,6 +38,10 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(
             }
             tvDescription.text = dataDetail.overview
             tvHomePage.text = dataDetail.homepage
+
+            tvHomePage.setOnClickListener {
+                Commons.openBrowser(this@DetailMovieActivity, dataDetail.homepage)
+            }
         }
 
     }
