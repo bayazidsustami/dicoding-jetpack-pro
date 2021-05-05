@@ -19,6 +19,8 @@ class MainActivityTest{
     private val listMovie = DataDummy.generateMovieData()
     private val detailMovie = DataDummy.generateDetailMovie()[0]
 
+    private val listTv = DataDummy.generateListTvShow()
+
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
@@ -26,6 +28,13 @@ class MainActivityTest{
     fun loadMoviesTest(){
         onView(withId(R.id.rvMovieList)).check(matches(isDisplayed()))
         onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(listMovie.size))
+    }
+
+    @Test
+    fun loadTvShowTest(){
+        onView(withText(R.string.tvShow)).perform(click())
+        onView(withId(R.id.rvTvShowList)).check(matches(isDisplayed()))
+        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(listTv.size))
     }
 
     @Test
