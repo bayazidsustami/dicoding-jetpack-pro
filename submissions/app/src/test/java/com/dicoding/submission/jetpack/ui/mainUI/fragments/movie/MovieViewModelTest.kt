@@ -1,9 +1,8 @@
-package com.dicoding.submission.jetpack.ui.mainUI.fragments
+package com.dicoding.submission.jetpack.ui.mainUI.fragments.movie
 
-import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieViewModel
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
-
-import org.junit.Assert.*
 import org.junit.Test
 
 class MovieViewModelTest {
@@ -16,7 +15,7 @@ class MovieViewModelTest {
     }
 
     @Test
-    fun `get list movie`(){
+    fun `get list movie test`(){
         val movies = viewModel.getMovie()
         assertNotNull(movies)
         assertEquals(10, movies.size)
