@@ -20,6 +20,7 @@ class MainActivityTest{
     private val detailMovie = DataDummy.generateDetailMovie()[0]
 
     private val listTv = DataDummy.generateListTvShow()
+    private val detailTvShow = DataDummy.generateDetailTvShow()[0]
 
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
@@ -47,5 +48,20 @@ class MainActivityTest{
         onView(withId(R.id.tvDescription)).check(matches(withText(detailMovie.overview)))
         onView(withId(R.id.tvHomePage)).check(matches(isDisplayed()))
         onView(withId(R.id.tvHomePage)).check(matches(withText(detailMovie.homepage)))
+    }
+
+    @Test
+    fun loadTvShowDetailTest(){
+        onView(withText(R.string.tvShow)).perform(click())
+        onView(withId(R.id.rvTvShowList)).check(matches(isDisplayed()))
+        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.viewPoster)).check(matches(isDisplayed()))
+        onView(withId(R.id.tvStatus)).check(matches(withText(detailTvShow.status)))
+        onView(withId(R.id.tvEpisode)).check(matches(withText(detailTvShow.episodeCount)))
+        onView(withId(R.id.tvDescription)).check(matches(isDisplayed()))
+        onView(withId(R.id.tvDescription)).check(matches(withText(detailTvShow.overview)))
+        onView(withId(R.id.tvHomePage)).check(matches(isDisplayed()))
+        onView(withId(R.id.tvHomePage)).check(matches(withText(detailTvShow.homepage)))
+
     }
 }
