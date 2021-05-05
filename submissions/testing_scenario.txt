@@ -1,0 +1,43 @@
+--> unit testing
+1. MovieViewModelTest
+ - memastikan data movie tidak null
+ - memastikan jumlah data movie sesuai dengan harapan yaitu 10
+2. TvShowViewModelTest
+ - memastikan data tv show tidak null
+ - memastikan jumalah data tvshow sesuai dengan harapan yaitu 10
+3. DetailMovieViewModelTest
+ - memastikan pengambilan data detailMovie tidak null
+ - memastikan data detailMovie sesuai dengan yang diharapkan
+4. DetailTvShowViewModelTest
+ - memastikan pengambilan data detailTvShow tidak null
+ - memastikan data detailTvShow sesuai dengan yang diharapkan
+
+-->instrument testing
+1. MainActivityTest
+ - loadMoviesTest
+   - memastikan rvMovieList Tampil
+   - memberikan aksi scroll hingga data terakhir pada rvMovieList
+ - loadTvShowTest
+   - klik tabLayout dengan text "Tv Shows"
+   - memastikan rvTvShowList Tampil
+   - memberikan aksi scroll hingga data terakhir pada rvMovieList
+ - loadMovieDetailTest
+   - memastikan rvMovieList Tampil
+   - memberikan aksi klik pada item pertama rvMovieList
+   - memastikan viewPoster tampil
+   - memastikan tvStatus sesuai dengan dataDetail yang diharapkan
+   - memastikan tvDescription tampil
+   - memastikan tvDescription sesuai dengan dataDetail yang diharapakan
+   - memastikan tvHomePage tampil
+   - memastikan tvHomePage sesuai denga dataDetail yang diharapkan
+ - loadTvShowDetailTest
+   - klik tabLayout dengant text "Tv Shows"
+   - memastikan rvTvShowList tampil
+   - memberikan aksi klik pada item pertama rvTvShowList
+   - memastikan viewPoster tampil
+   - memastikan tvStatus sesuai dengan dataDetail yang diharapkan
+   - memastikan tvEpisode sesuai dengan dataDetail yang diharapkan
+   - memastikan tvDescription tampil
+   - memastikan tvDescription sesuai dengan dataDetail yang diharapkan
+   - memastikan tvHomePage tampil
+   - memastikan tvHomePage sesuai denga dataDetail yang diharapkan

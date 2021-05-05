@@ -62,6 +62,5 @@ class MainActivityTest{
         onView(withId(R.id.tvDescription)).check(matches(withText(detailTvShow.overview)))
         onView(withId(R.id.tvHomePage)).check(matches(isDisplayed()))
         onView(withId(R.id.tvHomePage)).check(matches(withText(detailTvShow.homepage)))
-
     }
 }
