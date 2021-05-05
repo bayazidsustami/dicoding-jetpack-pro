@@ -1,5 +1,6 @@
 package com.dicoding.submission.jetpack.ui.mainUI.fragments
 
+import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieViewModel
 import org.junit.Before
 
 import org.junit.Assert.*

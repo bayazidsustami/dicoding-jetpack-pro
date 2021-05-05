@@ -1,4 +1,4 @@
-package com.dicoding.submission.jetpack.ui.mainUI.fragments
+package com.dicoding.submission.jetpack.ui.mainUI.fragments.movie
 
 import androidx.lifecycle.ViewModel
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity

@@ -13,8 +13,8 @@ abstract class BaseActivity<B: ViewBinding>(val bindingFactory: (LayoutInflater)
     protected val binding: B
         get() = _binding as B
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         _binding = bindingFactory(layoutInflater)
         setContentView(requireNotNull(_binding).root)
         initializeView(binding)

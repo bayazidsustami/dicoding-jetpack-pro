@@ -1,4 +1,4 @@
-package com.dicoding.submission.jetpack.ui.mainUI.fragments
+package com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow
 
 import com.dicoding.submission.jetpack.databinding.FragmentTvBinding
 import com.dicoding.submission.jetpack.ui.baseUI.BaseFragment
