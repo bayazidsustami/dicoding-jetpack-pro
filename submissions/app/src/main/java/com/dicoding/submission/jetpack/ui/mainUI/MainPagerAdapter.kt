@@ -8,9 +8,7 @@ import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowFragment
 
 class MainPagerAdapter(fm: FragmentActivity): FragmentStateAdapter(fm) {
 
-    companion object{
-
-    }
+    companion object;
 
     override fun getItemCount(): Int = 2
 
