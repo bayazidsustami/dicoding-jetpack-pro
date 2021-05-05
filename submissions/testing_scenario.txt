@@ -30,6 +30,7 @@
    - memastikan tvDescription sesuai dengan dataDetail yang diharapakan
    - memastikan tvHomePage tampil
    - memastikan tvHomePage sesuai denga dataDetail yang diharapkan
+   - memberikan aksi klik pada tvHomePage
  - loadTvShowDetailTest
    - klik tabLayout dengant text "Tv Shows"
    - memastikan rvTvShowList tampil
@@ -41,3 +42,4 @@
    - memastikan tvDescription sesuai dengan dataDetail yang diharapkan
    - memastikan tvHomePage tampil
    - memastikan tvHomePage sesuai denga dataDetail yang diharapkan
+   - memberikan aksi klik pada tvHomePage
