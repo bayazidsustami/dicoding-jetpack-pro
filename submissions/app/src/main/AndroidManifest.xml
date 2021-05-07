@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dicoding.submission.jetpack">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DicodingJetpack">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.mainUI.detail.tvShow.DetailTvShowActivity"/>
+        <activity android:name=".ui.mainUI.detail.movie.DetailMovieActivity" />
+        <activity android:name=".ui.mainUI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
