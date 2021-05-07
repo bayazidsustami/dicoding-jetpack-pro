@@ -11,11 +11,7 @@ class DetailMovieViewModel: ViewModel() {
         this.movieId = movieId
     }
 
-    fun getDetailMovie(): DetailMovieEntity{
-        lateinit var movie: DetailMovieEntity
-        val moviesData = DataDummy.generateDetailMovie()
-        movie = moviesData.single { it.id == movieId }
+    fun getDetailMovie(): DetailMovieEntity =
+        DataDummy.generateDetailMovie().single { it.id == movieId }
 
-        return movie
-    }
 }

@@ -12,8 +12,7 @@ class DetailTvShowViewModel: ViewModel() {
         this.tvId = tvId
     }
 
-    fun getDetailTvShow(): DetailTvShowsEntity{
-        val tvShows = DataDummy.generateDetailTvShow()
-        return tvShows.single { it.id == tvId }
-    }
+    fun getDetailTvShow(): DetailTvShowsEntity =
+        DataDummy.generateDetailTvShow().single { it.id == tvId }
+
 }
