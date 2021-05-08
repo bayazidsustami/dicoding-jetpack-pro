@@ -16,6 +16,7 @@ buildscript {
         glideVersion = '4.11.0'
 
         androidXTestVersion = '1.2.0'
+        mockitoVersion = '3.8.0'
     }
     repositories {
         google()

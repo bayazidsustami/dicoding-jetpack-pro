@@ -14,6 +14,7 @@ import com.dicoding.sample.academy.data.CourseEntity
 import com.dicoding.sample.academy.databinding.ActivityDetailCourseBinding
 import com.dicoding.sample.academy.databinding.ContentDetailCourseBinding
 import com.dicoding.sample.academy.ui.reader.CourseReaderActivity
+import com.dicoding.sample.academy.viewModel.ViewModelFactory
 
 class DetailCourseActivity : AppCompatActivity() {
 
@@ -35,7 +36,8 @@ class DetailCourseActivity : AppCompatActivity() {
 
         val detailAdapter = DetailCourseAdapter()
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
