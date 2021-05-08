@@ -1,3 +1,4 @@
+include ':livedataapi'
 include ':courselivedata'
 include ':app'
 rootProject.name = "Academy"
