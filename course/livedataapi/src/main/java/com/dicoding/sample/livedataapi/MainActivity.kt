@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.dicoding.sample.livedataapi.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels()
@@ -43,6 +44,16 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.isLoading.observe(this, {
             activityMainBinding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        })
+
+        mainViewModel.snackbarText.observe(this, {
+            it.getContentIfNotHandled()?.let { msg ->
+                Snackbar.make(
+                    window.decorView.rootView,
+                    msg,
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         })
 
         activityMainBinding.btnSend.setOnClickListener {
