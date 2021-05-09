@@ -1,5 +1,6 @@
 package com.dicoding.sample.academy.ui.reader
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.sample.academy.data.ModuleEntity
 import com.dicoding.sample.academy.data.source.AcademyRepository
@@ -18,7 +19,7 @@ class CourseReaderViewModel(
         this.moduleId = moduleId
     }
 
-    fun getModules(): List<ModuleEntity> = repository.getAllModulesByCourse(courseId)
+    fun getModules(): LiveData<List<ModuleEntity>> = repository.getAllModulesByCourse(courseId)
 
-    fun getSelectedModule(): ModuleEntity = repository.getContent(courseId, moduleId)
+    fun getSelectedModule(): LiveData<ModuleEntity> = repository.getContent(courseId, moduleId)
 }

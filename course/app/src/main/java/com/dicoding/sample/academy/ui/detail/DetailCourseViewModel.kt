@@ -1,5 +1,6 @@
 package com.dicoding.sample.academy.ui.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.sample.academy.data.CourseEntity
 import com.dicoding.sample.academy.data.ModuleEntity
@@ -14,7 +15,7 @@ class DetailCourseViewModel(
         this.courseId = courseId
     }
 
-    fun getCourse(): CourseEntity = repository.getCourseWithModules(courseId)
+    fun getCourse(): LiveData<CourseEntity> = repository.getCourseWithModules(courseId)
 
-    fun getModules(): List<ModuleEntity> = repository.getAllModulesByCourse(courseId)
+    fun getModules(): LiveData<List<ModuleEntity>> = repository.getAllModulesByCourse(courseId)
 }

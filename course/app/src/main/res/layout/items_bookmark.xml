@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
     app:cardMaxElevation="4dp"
@@ -40,6 +41,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:maxLines="2"
+            android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_poster"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,6 +54,7 @@
             android:layout_marginTop="8dp"
             android:gravity="start"
             android:textSize="14sp"
+            android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="@+id/tv_item_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
             tools:text="@string/dateline" />
