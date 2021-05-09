@@ -20,6 +20,7 @@ class HomeActivityTest{
 
     @Test
     fun loadCourse(){
+        delayTwoSecond()
         onView(withId(R.id.rv_academy)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_academy)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyCourse.size))
     }
@@ -47,4 +48,11 @@ class HomeActivityTest{
         onView(withId(R.id.rv_bookmark)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_bookmark)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyCourse.size))
     }
-}
+
+    private fun delayTwoSecond() {
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+
+        }
