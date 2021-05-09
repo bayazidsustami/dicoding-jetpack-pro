@@ -52,6 +52,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    //test idling resource
+    implementation "androidx.test.espresso:espresso-idling-resource:$idleResourceVersion"
+
     //testing
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"

@@ -19,6 +19,7 @@ buildscript {
 
         androidXTestVersion = '1.2.0'
         mockitoVersion = '3.8.0'
+        idleResourceVersion = '3.2.0'
     }
     repositories {
         google()
