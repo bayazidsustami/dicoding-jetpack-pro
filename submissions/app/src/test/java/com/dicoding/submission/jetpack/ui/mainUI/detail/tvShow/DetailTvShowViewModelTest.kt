@@ -1,9 +1,8 @@
 package com.dicoding.submission.jetpack.ui.mainUI.detail.tvShow
 
 import com.dicoding.submission.jetpack.utils.DataDummy
-import org.junit.Before
-
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 
 class DetailTvShowViewModelTest {

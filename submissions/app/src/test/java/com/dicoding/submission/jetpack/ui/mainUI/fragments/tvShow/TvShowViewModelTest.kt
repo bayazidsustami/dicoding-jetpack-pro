@@ -1,8 +1,7 @@
 package com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow
 
-import org.junit.Before
-
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 
 class TvShowViewModelTest {
