@@ -6,7 +6,6 @@ import com.dicoding.submission.jetpack.data.dataSource.remote.filmDataSource.Fil
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.utils.DataDummy.BASE_POSTER_PATH
-import com.dicoding.submission.jetpack.utils.EspressoIdlingResource
 import com.dicoding.submission.jetpack.utils.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch

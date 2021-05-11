@@ -6,7 +6,6 @@ import com.dicoding.submission.jetpack.data.dataSource.remote.tvShowDataSource.T
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.utils.DataDummy
-import com.dicoding.submission.jetpack.utils.EspressoIdlingResource
 import com.dicoding.submission.jetpack.utils.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch

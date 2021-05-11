@@ -2,7 +2,6 @@ package com.dicoding.submission.jetpack.data.dataSource
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dicoding.submission.jetpack.TestCoroutineRule
-import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.tvShow.DetailTvShowResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.tvShowDataSource.TvShowDataSourceImpl
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
@@ -14,7 +13,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
