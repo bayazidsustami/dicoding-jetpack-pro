@@ -2,7 +2,7 @@ package com.dicoding.submission.jetpack.data.dataSource.remote.response.details.
 
 import com.google.gson.annotations.SerializedName
 
-data class GenresItem(
+data class TvGenresItem(
 
 	@field:SerializedName("name")
 	val name: String? = null,

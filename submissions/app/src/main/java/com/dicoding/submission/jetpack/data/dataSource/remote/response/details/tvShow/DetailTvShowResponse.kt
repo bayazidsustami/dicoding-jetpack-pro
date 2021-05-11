@@ -1,5 +1,6 @@
 package com.dicoding.submission.jetpack.data.dataSource.remote.response.details.tvShow
 
+import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.movies.TvGenresItem
 import com.google.gson.annotations.SerializedName
 
 data class DetailTvShowResponse(
@@ -20,7 +21,7 @@ data class DetailTvShowResponse(
 	val backdropPath: String? = null,
 
 	@field:SerializedName("genres")
-	val genres: List<GenresItem?>? = null,
+	val genres: List<TvGenresItem?>? = null,
 
 	@field:SerializedName("popularity")
 	val popularity: Double? = null,

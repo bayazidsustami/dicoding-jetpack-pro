@@ -20,15 +20,15 @@ class TvShowRepository(
 ) {
     fun getDiscoverTv(): LiveData<Result<List<TvShowsEntity>>>{
         val tvResult = MutableLiveData<Result<List<TvShowsEntity>>>()
-        EspressoIdlingResource.increment() //TODO don't forget to comment before build
+        //EspressoIdlingResource.increment() //TODO don't forget to comment before build
         coroutineScope.launch {
             remoteDataSource.getDiscoverTv().onStart {
                 tvResult.postValue(Result.Loading(data = null))
             }.catch {
-                EspressoIdlingResource.decrement() //TODO don't forget to comment before build
+                //EspressoIdlingResource.decrement() //TODO don't forget to comment before build
                 tvResult.postValue(Result.Error(data = null, message = it.message))
             }.collect {
-                EspressoIdlingResource.decrement() //TODO don't forget to comment before build
+                //EspressoIdlingResource.decrement() //TODO don't forget to comment before build
                 val dataToMap = it.results
                 val afterMap = dataToMap?.mapNotNull { result ->
                     TvShowsEntity(
@@ -45,15 +45,15 @@ class TvShowRepository(
 
     fun getDetailTv(idTv: String): LiveData<Result<DetailTvShowsEntity>>{
         val detailResult = MutableLiveData<Result<DetailTvShowsEntity>>()
-        EspressoIdlingResource.increment() //TODO don't forget to comment before build
+        //EspressoIdlingResource.increment() //TODO don't forget to comment before build
         coroutineScope.launch {
             remoteDataSource.getDetailTv(idTv).onStart {
                 detailResult.postValue(Result.Loading(data = null))
             }.catch {
-                EspressoIdlingResource.decrement() //TODO don't forget to comment before build
+                //EspressoIdlingResource.decrement() //TODO don't forget to comment before build
                 detailResult.postValue(Result.Error(data = null, message = it.message))
             }.collect { results ->
-                EspressoIdlingResource.decrement() //TODO don't forget to comment before build
+                //EspressoIdlingResource.decrement() //TODO don't forget to comment before build
                 val dataMap = DetailTvShowsEntity(
                     results.id.toString(),
                     "${DataDummy.BASE_POSTER_PATH}${results.posterPath}",
