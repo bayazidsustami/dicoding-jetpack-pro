@@ -1,7 +1,9 @@
 package com.dicoding.submission.jetpack.ui.mainUI
 
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -10,6 +12,9 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.dicoding.submission.jetpack.R
 import com.dicoding.submission.jetpack.utils.DataDummy
+import com.dicoding.submission.jetpack.utils.EspressoIdlingResource
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,10 +25,18 @@ class MainActivityTest{
     private val detailMovie = DataDummy.generateDetailMovie()[0]
 
     private val listTv = DataDummy.generateListTvShow()
-    private val detailTvShow = DataDummy.generateDetailTvShow()[0]
+    private val detailTvShow = DataDummy.generateDetailTvShow()[1]
 
-    @get:Rule
-    var activityRule = ActivityScenarioRule(MainActivity::class.java)
+    @Before
+    fun setup(){
+        ActivityScenario.launch(MainActivity::class.java)
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
+    }
+
+    @After
+    fun tearDown(){
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
+    }
 
     @Test
     fun loadMoviesTest(){

@@ -75,6 +75,9 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:$koinVersion"
     implementation "org.koin:koin-core:$koinVersion"
 
+    //idling resource
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+
     //testing
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"

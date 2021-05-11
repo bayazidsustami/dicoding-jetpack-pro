@@ -284,7 +284,7 @@ object DataDummy {
             "$BASE_POSTER_PATH/yDWJYRAwMNKbIYT8ZB33qy84uzO.jpg",
             "https://www.amazon.com/dp/B08WJP55PR",
             "Invincible",
-            "Mark must prove he's become the hero he's always wanted to be by stopping an unstoppable force.",
+            "Mark Grayson is a normal teenager except for the fact that his father is the most powerful superhero on the planet. Shortly after his seventeenth birthday, Mark begins to develop powers of his own and enters into his father’s tutelage.",
                 "Returning Series",
                 "8"
         )
