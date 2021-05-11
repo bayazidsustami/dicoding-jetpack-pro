@@ -7,6 +7,7 @@ import com.dicoding.submission.jetpack.data.dataSource.remote.tvShowDataSource.T
 import com.dicoding.submission.jetpack.network.ApiBuilder
 import com.dicoding.submission.jetpack.network.ApiService
 import com.dicoding.submission.jetpack.ui.mainUI.detail.movie.DetailMovieViewModel
+import com.dicoding.submission.jetpack.ui.mainUI.detail.tvShow.DetailTvShowViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieAdapter
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowAdapter
@@ -21,6 +22,7 @@ object ApplicationModule {
         viewModel { MovieViewModel(get()) }
         viewModel { DetailMovieViewModel(get()) }
         viewModel { TvShowViewModel(get()) }
+        viewModel { DetailTvShowViewModel(get()) }
     }
 
     val repositoryModule = module {
