@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.dicoding.submission.jetpack.data.dataSource.remote.filmDataSource.FilmDataSourceImpl
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
+import com.dicoding.submission.jetpack.utils.DataDummy.BASE_POSTER_PATH
 import com.dicoding.submission.jetpack.utils.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
@@ -13,8 +14,8 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class FilmRepository constructor(
-    val remoteDataSource: FilmDataSourceImpl,
-    val coroutineScope: CoroutineScope
+    private val remoteDataSource: FilmDataSourceImpl,
+    private val coroutineScope: CoroutineScope
 ) {
     fun getDiscoverMovie(): LiveData<Result<List<MoviesEntity>>> {
         val movieListResult = MutableLiveData<Result<List<MoviesEntity>>>()
@@ -28,8 +29,8 @@ class FilmRepository constructor(
                 val afterMap = dataToMap?.mapNotNull { result ->
                     MoviesEntity(
                         result?.id.toString(),
-                        result?.posterPath!!,
-                        result.title!!,
+                        "$BASE_POSTER_PATH${result?.posterPath}",
+                        result?.title!!,
                         result.releaseDate!!
                     )
                 }

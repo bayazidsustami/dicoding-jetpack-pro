@@ -2,7 +2,6 @@ package com.dicoding.submission.jetpack.ui.mainUI.fragments.movie
 
 import android.content.Intent
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.databinding.FragmentMovieBinding
@@ -12,16 +11,18 @@ import com.dicoding.submission.jetpack.ui.mainUI.detail.movie.DetailMovieActivit
 import com.dicoding.submission.jetpack.utils.Result
 import com.dicoding.submission.jetpack.utils.gone
 import com.dicoding.submission.jetpack.utils.visible
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieFragment: BaseFragment<FragmentMovieBinding>(
     FragmentMovieBinding::inflate
 ) {
 
-    private val viewModel: MovieViewModel by viewModels()
+    private val viewModel: MovieViewModel by viewModel()
+    private val movieAdapter: MovieAdapter by inject()
 
     override fun initializeView(bind: FragmentMovieBinding) {
 
-        val movieAdapter = MovieAdapter()
         with(bind.rvMovieList){
             adapter = movieAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)

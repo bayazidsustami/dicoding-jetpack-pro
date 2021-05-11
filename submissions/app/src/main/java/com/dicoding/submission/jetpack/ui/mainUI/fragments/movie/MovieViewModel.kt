@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.dicoding.submission.jetpack.data.dataSource.FilmRepository
 
 class MovieViewModel constructor(
-    val repository: FilmRepository
+    private val repository: FilmRepository
 ): ViewModel() {
     fun getMovie() = repository.getDiscoverMovie()
 }

@@ -7,7 +7,7 @@ import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 
 object DataDummy {
 
-    private const val BASE_POSTER_PATH = "https://www.themoviedb.org/t/p/w1280"
+    const val BASE_POSTER_PATH = "https://www.themoviedb.org/t/p/w1280"
 
     fun generateMovieData(): List<MoviesEntity> {
         val movies = mutableListOf<MoviesEntity>()

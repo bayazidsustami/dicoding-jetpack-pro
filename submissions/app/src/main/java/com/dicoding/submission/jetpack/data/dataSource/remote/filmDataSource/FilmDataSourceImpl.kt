@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class FilmDataSourceImpl  constructor(
-    val apiService: ApiService
+    private val apiService: ApiService
 ): DataSource.FilmDataSource {
     override suspend fun getDiscoverFilm(): Flow<BaseListResponse> {
         return flow {
