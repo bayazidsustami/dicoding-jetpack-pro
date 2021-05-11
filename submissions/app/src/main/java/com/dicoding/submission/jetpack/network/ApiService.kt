@@ -4,6 +4,8 @@ import com.dicoding.submission.jetpack.BuildConfig
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.movies.DetailMovieResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.tvShow.DetailTvShowResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.BaseListResponse
+import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.ResultsItemMovie
+import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.ResultsItemTv
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -16,14 +18,14 @@ interface ApiService {
         @Query("page") page: String = "1",
         @Query("language") language: String = "en-US",
         @Query("api_key") apiKey: String = BuildConfig.API_KEY
-    ): BaseListResponse
+    ): BaseListResponse<ResultsItemMovie>
 
     @GET("discover/tv")
     suspend fun getDiscoverTv(
         @Query("page") page: String = "1",
         @Query("language") language: String = "en-US",
         @Query("api_key") apiKey: String = BuildConfig.API_KEY
-    ): BaseListResponse
+    ): BaseListResponse<ResultsItemTv>
 
     @GET("movie/{id}")
     suspend fun getDetailMovie(

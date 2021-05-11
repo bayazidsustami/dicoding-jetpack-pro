@@ -2,7 +2,7 @@ package com.dicoding.submission.jetpack.data.dataSource.remote.response.list
 
 import com.google.gson.annotations.SerializedName
 
-data class ResultsItem(
+data class ResultsItemMovie(
 
 	@field:SerializedName("overview")
 	val overview: String? = null,

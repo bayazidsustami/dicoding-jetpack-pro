@@ -1,9 +1,9 @@
 package com.dicoding.submission.jetpack
 
 import android.app.Application
+import com.dicoding.submission.jetpack.di.ApplicationModule.adapterModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.coroutineScopeModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.dataSourceModule
-import com.dicoding.submission.jetpack.di.ApplicationModule.movieAdapterModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.networkModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.repositoryModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.viewModelModule
@@ -21,7 +21,7 @@ class FilmExplorerApp: Application() {
             androidLogger(Level.DEBUG)
             androidContext(this@FilmExplorerApp)
             modules(listOf(
-                movieAdapterModule,
+                adapterModule,
                 viewModelModule,
                 repositoryModule,
                 coroutineScopeModule,
