@@ -40,7 +40,7 @@ object ApiBuilder {
             .build()
     }
 
-    fun createService() = retrofit.create(ApiService::class.java)
+    fun createService(): ApiService = retrofit.create(ApiService::class.java)
 
 
 }
