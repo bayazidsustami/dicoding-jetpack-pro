@@ -6,6 +6,7 @@ import com.dicoding.submission.jetpack.data.dataSource.remote.filmDataSource.Fil
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.utils.DataDummy.BASE_POSTER_PATH
+import com.dicoding.submission.jetpack.utils.EspressoIdlingResource
 import com.dicoding.submission.jetpack.utils.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.catch
@@ -18,16 +19,16 @@ class FilmRepository constructor(
     private val coroutineScope: CoroutineScope
 ) {
     fun getDiscoverMovie(): LiveData<Result<List<MoviesEntity>>> {
-        //EspressoIdlingResource.increment() //TODO don't forget to comment before build
+        EspressoIdlingResource.increment() //TODO don't forget to comment before build
         val movieListResult = MutableLiveData<Result<List<MoviesEntity>>>()
         coroutineScope.launch {
             remoteDataSource.getDiscoverFilm().onStart {
                 movieListResult.postValue(Result.Loading<List<MoviesEntity>>(data = null))
             }.catch {
-                //EspressoIdlingResource.decrement() //TODO don't forget to comment before build
+                EspressoIdlingResource.decrement() //TODO don't forget to comment before build
                 movieListResult.postValue(Result.Error<List<MoviesEntity>>(data = null, message = it.message))
             }.collect {
-                //EspressoIdlingResource.decrement() //TODO don't forget to comment before build
+                EspressoIdlingResource.decrement() //TODO don't forget to comment before build
                 val dataToMap = it.results
                 val afterMap = dataToMap?.mapNotNull { result ->
                     MoviesEntity(
@@ -45,15 +46,15 @@ class FilmRepository constructor(
 
     fun getDetailMovie(idMovie: String): LiveData<Result<DetailMovieEntity>>{
         val detailResult = MutableLiveData<Result<DetailMovieEntity>>()
-        //EspressoIdlingResource.increment() //TODO don't forget to comment before build
+        EspressoIdlingResource.increment() //TODO don't forget to comment before build
         coroutineScope.launch {
             remoteDataSource.getDetailFilm(idMovie).onStart {
                 detailResult.postValue(Result.Loading<DetailMovieEntity>(data = null))
             }.catch {
-                //EspressoIdlingResource.decrement() //TODO don't forget to comment before build
+                EspressoIdlingResource.decrement() //TODO don't forget to comment before build
                 detailResult.postValue(Result.Error<DetailMovieEntity>(data = null, message = it.message))
             }.collect { results ->
-                //EspressoIdlingResource.decrement() //TODO don't forget to comment before build
+                EspressoIdlingResource.decrement() //TODO don't forget to comment before build
                 val dataMap = DetailMovieEntity(
                     results.id.toString(),
                     results.homepage!!,
