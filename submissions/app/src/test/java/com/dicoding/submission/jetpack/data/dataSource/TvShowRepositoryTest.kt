@@ -3,6 +3,7 @@ package com.dicoding.submission.jetpack.data.dataSource
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dicoding.submission.jetpack.TestCoroutineRule
 import com.dicoding.submission.jetpack.data.dataSource.remote.tvShowDataSource.TvShowDataSourceImpl
+import com.dicoding.submission.jetpack.data.fakeRepository.FakeTvShowRepository
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.utils.DataDummy.BASE_POSTER_PATH
@@ -37,11 +38,11 @@ class TvShowRepositoryTest{
 
     private var coroutineScope = CoroutineScope(Dispatchers.Main)
 
-    private lateinit var repository: TvShowRepository
+    private lateinit var repository: FakeTvShowRepository
 
     @Before
     fun setup(){
-        repository = TvShowRepository(dataSource, coroutineScope)
+        repository = FakeTvShowRepository(dataSource, coroutineScope)
     }
 
     @Test

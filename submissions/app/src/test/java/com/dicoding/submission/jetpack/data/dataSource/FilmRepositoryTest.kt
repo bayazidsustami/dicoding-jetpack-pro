@@ -3,6 +3,7 @@ package com.dicoding.submission.jetpack.data.dataSource
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.dicoding.submission.jetpack.TestCoroutineRule
 import com.dicoding.submission.jetpack.data.dataSource.remote.filmDataSource.FilmDataSourceImpl
+import com.dicoding.submission.jetpack.data.fakeRepository.FakeFilmRepository
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.utils.DummyResponse
@@ -37,10 +38,10 @@ class FilmRepositoryTest{
 
     private var coroutineScope = CoroutineScope(Dispatchers.Main)
 
-    private lateinit var repository: FilmRepository
+    private lateinit var repository: FakeFilmRepository
     @Before
     fun setup(){
-        repository = FilmRepository(dataSource, coroutineScope)
+        repository = FakeFilmRepository(dataSource, coroutineScope)
     }
 
     @Test
