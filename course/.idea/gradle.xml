@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/courselivedata" />
             <option value="$PROJECT_DIR$/idlingresource" />
             <option value="$PROJECT_DIR$/livedataapi" />
+            <option value="$PROJECT_DIR$/mynotesapp" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

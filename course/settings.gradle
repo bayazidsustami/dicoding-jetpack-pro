@@ -3,3 +3,4 @@ include ':courselivedata'
 include ':app'
 rootProject.name = "Academy"
 include ':idlingresource'
+include ':mynotesapp'
