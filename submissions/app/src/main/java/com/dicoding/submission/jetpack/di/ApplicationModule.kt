@@ -14,7 +14,7 @@ import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowAdapter
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 object ApplicationModule {

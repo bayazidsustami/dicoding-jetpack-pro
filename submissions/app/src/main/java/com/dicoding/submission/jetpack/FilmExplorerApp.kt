@@ -18,7 +18,7 @@ class FilmExplorerApp: Application() {
         super.onCreate()
 
         startKoin {
-            androidLogger(Level.DEBUG)
+            androidLogger(Level.NONE)
             androidContext(this@FilmExplorerApp)
             modules(listOf(
                 adapterModule,

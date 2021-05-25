@@ -7,7 +7,7 @@ import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.databinding.ActivityDetailTvShowBinding
 import com.dicoding.submission.jetpack.ui.baseUI.BaseActivity
 import com.dicoding.submission.jetpack.utils.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
     ActivityDetailTvShowBinding::inflate
