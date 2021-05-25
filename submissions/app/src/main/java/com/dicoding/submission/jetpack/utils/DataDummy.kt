@@ -7,7 +7,7 @@ import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 
 object DataDummy {
 
-    private const val BASE_POSTER_PATH = "https://www.themoviedb.org/t/p/w1280"
+    const val BASE_POSTER_PATH = "https://www.themoviedb.org/t/p/w1280"
 
     fun generateMovieData(): List<MoviesEntity> {
         val movies = mutableListOf<MoviesEntity>()
@@ -284,7 +284,7 @@ object DataDummy {
             "$BASE_POSTER_PATH/yDWJYRAwMNKbIYT8ZB33qy84uzO.jpg",
             "https://www.amazon.com/dp/B08WJP55PR",
             "Invincible",
-            "Mark must prove he's become the hero he's always wanted to be by stopping an unstoppable force.",
+            "Mark Grayson is a normal teenager except for the fact that his father is the most powerful superhero on the planet. Shortly after his seventeenth birthday, Mark begins to develop powers of his own and enters into his father’s tutelage.",
                 "Returning Series",
                 "8"
         )
@@ -297,7 +297,7 @@ object DataDummy {
                 "The Good Doctor",
                 "A young surgeon with Savant syndrome is recruited into the surgical unit of a prestigious hospital. The question will arise: can a person who doesn't have the ability to relate to people actually save their lives",
                 "Returning Series",
-                "17"
+                "76"
         )
         )
         detailTvShow.add(DetailTvShowsEntity(
@@ -307,7 +307,7 @@ object DataDummy {
             "The Flash",
             "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \\\"meta-human\\\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
             "Returning Series",
-            "9"
+            "146"
         ))
 
         detailTvShow.add(

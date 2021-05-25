@@ -8,12 +8,18 @@ import com.dicoding.submission.jetpack.ui.mainUI.OnItemClickListener
 import com.dicoding.submission.jetpack.utils.inflating
 import com.dicoding.submission.jetpack.utils.loadImage
 
-class MovieAdapter(private val list: List<MoviesEntity>): RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter: RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+    private var list: List<MoviesEntity> = listOf()
 
     private lateinit var onItemClickListener: OnItemClickListener<MoviesEntity>
 
     fun setOnItemCLickListener(onItemClickListener: OnItemClickListener<MoviesEntity>){
         this.onItemClickListener = onItemClickListener
+    }
+
+    fun setData(list: List<MoviesEntity>){
+        this.list = list
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

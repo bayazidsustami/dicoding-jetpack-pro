@@ -8,13 +8,20 @@ import com.dicoding.submission.jetpack.ui.mainUI.OnItemClickListener
 import com.dicoding.submission.jetpack.utils.inflating
 import com.dicoding.submission.jetpack.utils.loadImage
 
-class TvShowAdapter(private val list: List<TvShowsEntity>)
+class TvShowAdapter
     :RecyclerView.Adapter<TvShowAdapter.ViewHolder>() {
+
+    private var list: List<TvShowsEntity> = listOf()
 
     private lateinit var onItemClickListener: OnItemClickListener<TvShowsEntity>
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener<TvShowsEntity>){
         this.onItemClickListener = onItemClickListener
+    }
+
+    fun setData(list: List<TvShowsEntity>){
+        this.list = list
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

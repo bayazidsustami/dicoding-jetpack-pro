@@ -1,16 +1,50 @@
 --> unit testing
 1. MovieViewModelTest
- - memastikan data movie tidak null
- - memastikan jumlah data movie sesuai dengan harapan yaitu 10
+ - memastikan objek yang dikembalikan tidak null
+ - memastikan state dapat mengembalikan loading
+ - memastikan state dapat mengembalikan error
+ - memastikan ketika dapat mengembalikan pesan error
+ - memastikan state dapat mengembalikan success 
+ - memastikan jumlah data movies sesuai dengan yang diharapkan
 2. TvShowViewModelTest
- - memastikan data tv show tidak null
- - memastikan jumalah data tvshow sesuai dengan harapan yaitu 10
+ - memastikan objek yang dikembalikan tidak null
+ - memastikan state dapat mengembalikan loading
+ - memastikan state dapat mengembalikan error
+ - memastikan ketika dapat mengembalikan pesan error
+ - memastikan state dapat mengembalikan success 
+ - memastikan jumalah data tvshow sesuai dengan yang diharapkan
 3. DetailMovieViewModelTest
- - memastikan pengambilan data detailMovie tidak null
+ - memastikan objek yang dikembalikan tidak null
+ - memastikan state dapat mengembalikan loading
+ - memastikan state dapat mengembalikan error
+ - memastikan ketika dapat mengembalikan pesan error
+ - memastikan state dapat mengembalikan success 
  - memastikan data detailMovie sesuai dengan yang diharapkan
 4. DetailTvShowViewModelTest
- - memastikan pengambilan data detailTvShow tidak null
+ - memastikan objek yang dikembalikan tidak null
+ - memastikan state dapat mengembalikan loading
+ - memastikan state dapat mengembalikan error
+ - memastikan ketika dapat mengembalikan pesan error
+ - memastikan state dapat mengembalikan success 
  - memastikan data detailTvShow sesuai dengan yang diharapkan
+5. FilmRepositoryTest
+ 5.1 get all movies
+ - memberikan nilai responseMovie dari data source,
+ - memastikan hasil tidak null,
+ - memastikan jumlah response movie dengan yang diharapkan
+ 5.2 get detail movies
+ - memberikan nilai responseMovie dari data source,
+ - memastikan hasil tidak null,
+ - memastikan data responseMovie sesuai dengan yang diharapkan
+6. TvShowRepositoryTest
+ 5.1 get all tvShows
+ - memberikan nilai responseTvShow dari data source,
+ - memastikan hasil tidak null,
+ - memastikan jumlah responseTvShow sesuai dengan yang diharapkan
+ 5.2 get detail tvShows
+ - memberikan nilai responseTvShow dari data source,
+ - memastikan hasil tidak null,
+ - memastikan data responseTvShow sesuai dengan yang diharapkan
 
 -->instrument testing
 1. MainActivityTest

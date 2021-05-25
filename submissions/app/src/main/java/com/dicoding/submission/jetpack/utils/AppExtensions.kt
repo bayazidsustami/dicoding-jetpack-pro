@@ -2,6 +2,7 @@ package com.dicoding.submission.jetpack.utils
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -25,4 +26,12 @@ fun ImageView.loadImage(context: Context, url: String){
         .load(url)
         .placeholder(context.circularProgress())
         .into(this)
+}
+
+fun View.visible(){
+    visibility = View.VISIBLE
+}
+
+fun View.gone(){
+    visibility = View.GONE
 }
