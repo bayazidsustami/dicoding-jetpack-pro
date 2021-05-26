@@ -16,6 +16,7 @@ import com.dicoding.sample.academy.vo.Status
 class ModuleContentFragment : Fragment() {
 
     private lateinit var fragmentModuleContentBinding: FragmentModuleContentBinding
+    private lateinit var viewModel: CourseReaderViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +30,7 @@ class ModuleContentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
+            viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
 
             viewModel.selectedModule.observe(viewLifecycleOwner){moduleEntity ->
                 if (moduleEntity != null){
@@ -38,25 +39,48 @@ class ModuleContentFragment : Fragment() {
                             fragmentModuleContentBinding.progressBar.visibility = View.VISIBLE
                         }
                         Status.SUCCESS -> {
-                            fragmentModuleContentBinding.progressBar.visibility = View.GONE
-                            if (moduleEntity.data?.contentEntity != null){
-                                populateWebView(moduleEntity.data)
-                            }
+                            if (moduleEntity.data != null){
+                                fragmentModuleContentBinding.progressBar.visibility = View.GONE
+                                if (moduleEntity.data.contentEntity != null){
+                                    populateWebView(moduleEntity.data)
+                                }
 
-                            //TODO add setNext button
-                            /*setButtonNextPrevState(moduleEntity.data)
-                            if (!moduleEntity.data.read) {
-                                viewModel.readContent(moduleEntity.data)
-                            }*/
+                                setButtonNextPrevState(moduleEntity.data)
+                                if (!moduleEntity.data.read) {
+                                    viewModel.readContent(moduleEntity.data)
+                                }
+                            }
                         }
                         Status.ERROR -> {
                             fragmentModuleContentBinding.progressBar.visibility = View.GONE
                             Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         }
                     }
+
+                    fragmentModuleContentBinding.btnNext.setOnClickListener { viewModel.setNextPage() }
+                    fragmentModuleContentBinding.btnPrev.setOnClickListener { viewModel.setPrevPage() }
                 }
             }
 
+        }
+    }
+
+    private fun setButtonNextPrevState(data: ModuleEntity) {
+        if (activity != null){
+            when(data.position){
+                0 -> {
+                    fragmentModuleContentBinding.btnPrev.isEnabled = false
+                    fragmentModuleContentBinding.btnNext.isEnabled = true
+                }
+                viewModel.getModuleSize() - 1 ->{
+                    fragmentModuleContentBinding.btnPrev.isEnabled = true
+                    fragmentModuleContentBinding.btnNext.isEnabled = false
+                }
+                else -> {
+                    fragmentModuleContentBinding.btnPrev.isEnabled = true
+                    fragmentModuleContentBinding.btnNext.isEnabled = true
+                }
+            }
         }
     }
 
