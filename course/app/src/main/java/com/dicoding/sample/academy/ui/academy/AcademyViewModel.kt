@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.dicoding.sample.academy.data.entity.CourseEntity
 import com.dicoding.sample.academy.data.source.AcademyRepository
+import com.dicoding.sample.academy.vo.Resource
 
 class AcademyViewModel(
     private val repository: AcademyRepository
 ): ViewModel() {
-    fun getCourses(): LiveData<List<CourseEntity>> = repository.getAllCourses()
+    fun getCourses(): LiveData<Resource<List<CourseEntity>>> = repository.getAllCourses()
 }

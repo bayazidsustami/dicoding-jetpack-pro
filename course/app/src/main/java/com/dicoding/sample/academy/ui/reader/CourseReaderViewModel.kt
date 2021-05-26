@@ -1,25 +1,73 @@
 package com.dicoding.sample.academy.ui.reader
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.dicoding.sample.academy.data.entity.ModuleEntity
 import com.dicoding.sample.academy.data.source.AcademyRepository
+import com.dicoding.sample.academy.vo.Resource
 
 class CourseReaderViewModel(
     private val repository: AcademyRepository
 ): ViewModel() {
-    private lateinit var courseId: String
-    private lateinit var moduleId: String
+    var courseId = MutableLiveData<String>()
+    var moduleId = MutableLiveData<String>()
 
     fun setSelectedCourse(courseId: String) {
-        this.courseId = courseId
+        this.courseId.value = courseId
     }
 
     fun setSelectedModule(moduleId: String) {
-        this.moduleId = moduleId
+        this.moduleId.value = moduleId
     }
 
-    fun getModules(): LiveData<List<ModuleEntity>> = repository.getAllModulesByCourse(courseId)
+    var modules: LiveData<Resource<List<ModuleEntity>>> = Transformations.switchMap(courseId) {mCourseId->
+        repository.getAllModulesByCourse(mCourseId)
+    }
 
-    fun getSelectedModule(): LiveData<ModuleEntity> = repository.getContent(courseId, moduleId)
+    val selectedModule: LiveData<Resource<ModuleEntity>> = Transformations.switchMap(moduleId){selectedPosition ->
+        repository.getContent(selectedPosition)
+    }
+
+    fun readContent(module: ModuleEntity){
+        repository.setReadModule(module)
+    }
+
+    fun getModuleSize(): Int{
+        if (modules.value != null){
+            val moduleEntities = modules.value?.data
+            if (moduleEntities != null){
+                return moduleEntities.size
+            }
+        }
+
+        return 0
+    }
+
+    fun setNextPage(){
+        if (selectedModule.value != null && modules.value != null){
+            val moduleEntity = selectedModule.value?.data
+            val moduleEntities = modules.value?.data
+            if (moduleEntity != null && moduleEntities != null){
+                val position = moduleEntity.position
+                if (position < moduleEntities.size && position >= 0){
+                    moduleId.value = moduleEntities[position + 1].moduleId
+                }
+            }
+        }
+    }
+
+    fun setPrevPage() {
+        if (selectedModule.value != null && modules.value != null) {
+            val moduleEntity = selectedModule.value?.data
+            val moduleEntities = modules.value?.data
+            if (moduleEntity != null && moduleEntities != null) {
+                val position = moduleEntity.position
+                if (position < moduleEntities.size && position >= 0) {
+                    moduleId.value = moduleEntities[position - 1].moduleId
+                }
+            }
+        }
+    }
 }

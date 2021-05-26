@@ -3,6 +3,7 @@ package com.dicoding.sample.academy.ui.detail
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,6 +17,7 @@ import com.dicoding.sample.academy.databinding.ActivityDetailCourseBinding
 import com.dicoding.sample.academy.databinding.ContentDetailCourseBinding
 import com.dicoding.sample.academy.ui.reader.CourseReaderActivity
 import com.dicoding.sample.academy.viewModel.ViewModelFactory
+import com.dicoding.sample.academy.vo.Status
 
 class DetailCourseActivity : AppCompatActivity() {
 
@@ -44,16 +46,36 @@ class DetailCourseActivity : AppCompatActivity() {
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
-                activityDetailCourseBinding.detailContent.progressBar.visibility = View.VISIBLE
-                activityDetailCourseBinding.detailContent.content.visibility = View.INVISIBLE
 
                 viewModel.setSelectedCourse(courseId)
-                viewModel.getModules().observe(this, {modules ->
-                    activityDetailCourseBinding.detailContent.progressBar.visibility = View.GONE
-                    activityDetailCourseBinding.detailContent.content.visibility = View.VISIBLE
-                    detailAdapter.setModules(modules)
-                    detailAdapter.notifyDataSetChanged()
-                })
+
+                viewModel.courseModule.observe(this){courseWithModuleResource ->
+                    if (courseWithModuleResource != null){
+                        when(courseWithModuleResource.status){
+                            Status.LOADING ->{
+                                activityDetailCourseBinding.detailContent.progressBar.visibility = View.VISIBLE
+                                activityDetailCourseBinding.detailContent.content.visibility = View.INVISIBLE
+                            }
+
+                            Status.SUCCESS -> {
+                                if (courseWithModuleResource.data != null){
+                                    activityDetailCourseBinding.detailContent.progressBar.visibility = View.GONE
+                                    activityDetailCourseBinding.detailContent.content.visibility = View.VISIBLE
+
+                                    detailAdapter.setModules(courseWithModuleResource.data.mModules)
+                                    detailAdapter.notifyDataSetChanged()
+                                    populateCourse(courseWithModuleResource.data.mCourse)
+                                }
+                            }
+
+                            Status.ERROR -> {
+                                activityDetailCourseBinding.detailContent.progressBar.visibility = View.GONE
+                                Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                            }
+
+                        }
+                    }
+                }
 
                 with(detailContentBinding.rvModule){
                     hasFixedSize()
@@ -62,7 +84,6 @@ class DetailCourseActivity : AppCompatActivity() {
                     val dividerItemDecoration = DividerItemDecoration(this@DetailCourseActivity, DividerItemDecoration.VERTICAL)
                     addItemDecoration(dividerItemDecoration)
                 }
-                viewModel.getCourse().observe(this, {course -> populateCourse(course)})
             }
         }
     }
