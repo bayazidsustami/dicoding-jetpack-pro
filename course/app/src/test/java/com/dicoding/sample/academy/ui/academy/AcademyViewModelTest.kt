@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.dicoding.sample.academy.data.entity.CourseEntity
 import com.dicoding.sample.academy.data.source.AcademyRepository
 import com.dicoding.sample.academy.utils.DataDummy
+import com.dicoding.sample.academy.vo.Resource
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -28,7 +29,7 @@ class AcademyViewModelTest {
     private lateinit var repository: AcademyRepository
 
     @Mock
-    private lateinit var observer: Observer<List<CourseEntity>>
+    private lateinit var observer: Observer<Resource<List<CourseEntity>>>
 
     @Before
     fun setup(){
@@ -37,12 +38,12 @@ class AcademyViewModelTest {
 
     @Test
     fun getCourses() {
-        val dummyCourse = DataDummy.generateDummyCourses()
-        val courses = MutableLiveData<List<CourseEntity>>()
+        val dummyCourse = Resource.success(DataDummy.generateDummyCourses())
+        val courses = MutableLiveData<Resource<List<CourseEntity>>>()
         courses.value = dummyCourse
 
         `when`(repository.getAllCourses()).thenReturn(courses)
-        val courseEntities = viewModel.getCourses().value
+        val courseEntities = viewModel.getCourses().value?.data
         verify(repository).getAllCourses()
         assertNotNull(courseEntities)
         assertEquals(5, courseEntities?.size)

@@ -1,12 +1,15 @@
 package com.dicoding.sample.academy.utils
 
+import com.dicoding.sample.academy.data.entity.ContentEntity
 import com.dicoding.sample.academy.data.entity.CourseEntity
+import com.dicoding.sample.academy.data.entity.CourseWithModule
 import com.dicoding.sample.academy.data.entity.ModuleEntity
 import com.dicoding.sample.academy.data.source.remote.response.ContentResponse
 import com.dicoding.sample.academy.data.source.remote.response.CourseResponse
 import com.dicoding.sample.academy.data.source.remote.response.ModuleResponse
 
 object DataDummy {
+
 
     fun generateDummyCourses(): List<CourseEntity> {
 
@@ -139,6 +142,7 @@ object DataDummy {
             "https://www.dicoding.com/images/small/academy/belajar_membuat_aplikasi_android_untuk_pemula_logo_070119140911.jpg"))
         return courses
     }
+
     fun generateRemoteDummyModules(courseId: String): List<ModuleResponse> {
         val modules = ArrayList<ModuleResponse>()
         modules.add(ModuleResponse(
@@ -174,7 +178,22 @@ object DataDummy {
         )
         return modules
     }
+
     fun generateRemoteDummyContent(moduleId: String): ContentResponse {
         return ContentResponse(moduleId, "This is a dummy content")
+    }
+
+    fun generateDummyContent(moduleId: String): ContentEntity =
+        ContentEntity("This is a dummy content")
+
+    fun generateDummyCourseWithModules(course: CourseEntity, bookmarked: Boolean): CourseWithModule {
+        course.bookmarked = bookmarked
+        return CourseWithModule(course, generateDummyModules(course.courseId))
+    }
+
+    fun generateDummyModuleWithContent(courseId: String): ModuleEntity {
+        val moduleEntity = generateDummyModules(courseId)[0]
+        moduleEntity.contentEntity = generateDummyContent(moduleEntity.moduleId)
+        return moduleEntity
     }
 }
