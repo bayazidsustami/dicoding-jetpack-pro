@@ -2,7 +2,7 @@ package com.dicoding.sample.academy.ui.reader
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.dicoding.sample.academy.data.ModuleEntity
+import com.dicoding.sample.academy.data.entity.ModuleEntity
 import com.dicoding.sample.academy.data.source.AcademyRepository
 
 class CourseReaderViewModel(

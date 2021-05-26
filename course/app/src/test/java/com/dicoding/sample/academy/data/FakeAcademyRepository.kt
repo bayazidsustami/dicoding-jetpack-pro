@@ -2,6 +2,9 @@ package com.dicoding.sample.academy.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.dicoding.sample.academy.data.entity.ContentEntity
+import com.dicoding.sample.academy.data.entity.CourseEntity
+import com.dicoding.sample.academy.data.entity.ModuleEntity
 import com.dicoding.sample.academy.data.source.AcademyDataSource
 import com.dicoding.sample.academy.data.source.remote.RemoteDataSource
 import com.dicoding.sample.academy.data.source.remote.response.ContentResponse

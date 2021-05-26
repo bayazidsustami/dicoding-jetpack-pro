@@ -2,8 +2,8 @@ package com.dicoding.sample.academy.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.dicoding.sample.academy.data.CourseEntity
-import com.dicoding.sample.academy.data.ModuleEntity
+import com.dicoding.sample.academy.data.entity.CourseEntity
+import com.dicoding.sample.academy.data.entity.ModuleEntity
 import com.dicoding.sample.academy.data.source.AcademyRepository
 
 class DetailCourseViewModel(

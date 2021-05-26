@@ -3,8 +3,8 @@ package com.dicoding.sample.academy.ui.reader
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dicoding.sample.academy.data.ContentEntity
-import com.dicoding.sample.academy.data.ModuleEntity
+import com.dicoding.sample.academy.data.entity.ContentEntity
+import com.dicoding.sample.academy.data.entity.ModuleEntity
 import com.dicoding.sample.academy.data.source.AcademyRepository
 import com.dicoding.sample.academy.utils.DataDummy
 import org.junit.Before

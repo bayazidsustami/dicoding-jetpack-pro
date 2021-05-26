@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.sample.academy.data.ModuleEntity
+import com.dicoding.sample.academy.data.entity.ModuleEntity
 import com.dicoding.sample.academy.databinding.FragmentModuleContentBinding
 import com.dicoding.sample.academy.ui.reader.CourseReaderViewModel
 import com.dicoding.sample.academy.viewModel.ViewModelFactory

@@ -9,7 +9,7 @@ import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.sample.academy.R
-import com.dicoding.sample.academy.data.CourseEntity
+import com.dicoding.sample.academy.data.entity.CourseEntity
 import com.dicoding.sample.academy.databinding.FragmentBookmarkBinding
 import com.dicoding.sample.academy.viewModel.ViewModelFactory
 
