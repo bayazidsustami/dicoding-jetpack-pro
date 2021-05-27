@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.academy.mynotesapp.R
 import com.dicoding.academy.mynotesapp.database.Note
 import com.dicoding.academy.mynotesapp.databinding.ActivityMainBinding
+import com.dicoding.academy.mynotesapp.helper.SortUtils
 import com.dicoding.academy.mynotesapp.helper.ViewModelFactory
 import com.dicoding.academy.mynotesapp.ui.insert.NoteAddUpdateActivity
 import com.google.android.material.snackbar.Snackbar
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         adapter = NotePagedListAdapter(this)
 
         val mainViewModel = obtainViewModel(this)
-        mainViewModel.getAllNotes().observe(this, noteObserver)
+        mainViewModel.getAllNotes(SortUtils.NEWEST).observe(this, noteObserver)
 
         binding?.rvNotes?.layoutManager = LinearLayoutManager(this)
         binding?.rvNotes?.setHasFixedSize(true)

@@ -1,11 +1,11 @@
 package com.dicoding.academy.mynotesapp.repository
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.dicoding.academy.mynotesapp.database.Note
 import com.dicoding.academy.mynotesapp.database.NoteDao
 import com.dicoding.academy.mynotesapp.database.NoteRoomDatabase
+import com.dicoding.academy.mynotesapp.helper.SortUtils
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -18,8 +18,10 @@ class NoteRepository(application: Application) {
         mNotesDao = db.noteDao()
     }
 
-    fun getAllNotes(): DataSource.Factory<Int, Note> =
-        mNotesDao.getAllNotes()
+    fun getAllNotes(sort: String): DataSource.Factory<Int, Note>{
+        val query = SortUtils.getSortedQuery(sort)
+        return mNotesDao.getAllNotes(query)
+    }
 
     fun insert(note: Note){
         executorService.execute { mNotesDao.insert(note) }
