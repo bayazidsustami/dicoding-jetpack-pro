@@ -3,9 +3,10 @@ package com.dicoding.academy.mynotesapp.helper
 import androidx.sqlite.db.SimpleSQLiteQuery
 
 object SortUtils {
-    const val NEWEST = "newest"
-    const val OLDEST = "oldest"
-    const val RANDOM = "random"
+    const val NEWEST = "Newest"
+    const val OLDEST = "Oldest"
+    const val RANDOM = "Random"
+
 
     fun getSortedQuery(filter: String): SimpleSQLiteQuery{
         val simpleQuery = StringBuilder().append("SELECT * FROM note ")
