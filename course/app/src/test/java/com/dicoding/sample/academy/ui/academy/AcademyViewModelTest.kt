@@ -3,6 +3,7 @@ package com.dicoding.sample.academy.ui.academy
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.dicoding.sample.academy.data.entity.CourseEntity
 import com.dicoding.sample.academy.data.source.AcademyRepository
 import com.dicoding.sample.academy.utils.DataDummy
@@ -29,7 +30,10 @@ class AcademyViewModelTest {
     private lateinit var repository: AcademyRepository
 
     @Mock
-    private lateinit var observer: Observer<Resource<List<CourseEntity>>>
+    private lateinit var observer: Observer<Resource<PagedList<CourseEntity>>>
+
+    @Mock
+    private lateinit var pagedList: PagedList<CourseEntity>
 
     @Before
     fun setup(){
@@ -38,8 +42,10 @@ class AcademyViewModelTest {
 
     @Test
     fun getCourses() {
-        val dummyCourse = Resource.success(DataDummy.generateDummyCourses())
-        val courses = MutableLiveData<Resource<List<CourseEntity>>>()
+        val dummyCourse = Resource.success(pagedList)
+        `when`(dummyCourse.data?.size).thenReturn(5)
+
+        val courses = MutableLiveData<Resource<PagedList<CourseEntity>>>()
         courses.value = dummyCourse
 
         `when`(repository.getAllCourses()).thenReturn(courses)
