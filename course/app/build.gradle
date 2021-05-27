@@ -56,6 +56,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomRuntimeVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+
     //test idling resource
     implementation "androidx.test.espresso:espresso-idling-resource:$idleResourceVersion"
 

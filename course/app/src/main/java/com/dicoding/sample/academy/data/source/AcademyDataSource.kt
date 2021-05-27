@@ -1,15 +1,16 @@
 package com.dicoding.sample.academy.data.source
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.dicoding.sample.academy.data.entity.CourseEntity
 import com.dicoding.sample.academy.data.entity.CourseWithModule
 import com.dicoding.sample.academy.data.entity.ModuleEntity
 import com.dicoding.sample.academy.vo.Resource
 
 interface AcademyDataSource {
-    fun getAllCourses(): LiveData<Resource<List<CourseEntity>>>
+    fun getAllCourses(): LiveData<Resource<PagedList<CourseEntity>>>
 
-    fun getBookmarkedCourses(): LiveData<List<CourseEntity>>
+    fun getBookmarkedCourses(): LiveData<PagedList<CourseEntity>>
 
     fun getCourseWithModules(courseId: String): LiveData<Resource<CourseWithModule>>
 
