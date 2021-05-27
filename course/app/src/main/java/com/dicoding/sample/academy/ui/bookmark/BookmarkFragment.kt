@@ -7,15 +7,20 @@ import android.view.ViewGroup
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.sample.academy.R
 import com.dicoding.sample.academy.data.entity.CourseEntity
 import com.dicoding.sample.academy.databinding.FragmentBookmarkBinding
 import com.dicoding.sample.academy.viewModel.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
 
     private lateinit var fragmentBookmarkBinding: FragmentBookmarkBinding
+    private lateinit var viewModel: BookmarkViewModel
+    private lateinit var adapter: BookmarkAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +33,12 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        itemTouchHelper.attachToRecyclerView(fragmentBookmarkBinding.rvBookmark)
+
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
-            val adapter = BookmarkAdapter(this)
+            viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
+             adapter = BookmarkAdapter(this)
 
             fragmentBookmarkBinding.progressBar.visibility = View.VISIBLE
             viewModel.getBookmarks().observe(viewLifecycleOwner, {courses ->
@@ -42,7 +49,7 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
             with(fragmentBookmarkBinding.rvBookmark) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                this.adapter = adapter
+                this.adapter = this@BookmarkFragment.adapter
             }
         }
     }
@@ -59,7 +66,7 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
         }
     }
 
-    /*private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback(){
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback(){
         override fun getMovementFlags(
             recyclerView: RecyclerView,
             viewHolder: RecyclerView.ViewHolder
@@ -84,6 +91,6 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
                 snackbar.show()
             }
         }
-    })*/
+    })
 
 }
