@@ -1,7 +1,10 @@
 package com.dicoding.submission.jetpack.di
 
+import android.content.Context
+import androidx.room.Room
 import com.dicoding.submission.jetpack.data.dataSource.FilmRepository
 import com.dicoding.submission.jetpack.data.dataSource.TvShowRepository
+import com.dicoding.submission.jetpack.data.dataSource.local.room.FilmExplorerDatabase
 import com.dicoding.submission.jetpack.data.dataSource.remote.filmDataSource.FilmDataSourceImpl
 import com.dicoding.submission.jetpack.data.dataSource.remote.tvShowDataSource.TvShowDataSourceImpl
 import com.dicoding.submission.jetpack.network.ApiBuilder
@@ -14,6 +17,7 @@ import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowAdapter
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -46,6 +50,18 @@ object ApplicationModule {
         }
         single { provideMovieDataSource(get()) }
         single { provideTvDataSource(get()) }
+    }
+
+    val databaseModule = module {
+        fun provideAppDatabase(context: Context): FilmExplorerDatabase{
+            return Room.databaseBuilder(
+                context,
+                FilmExplorerDatabase::class.java,
+                "movie.db"
+            ).build()
+        }
+
+        single { provideAppDatabase(androidApplication()) }
     }
 
     val coroutineScopeModule = module {

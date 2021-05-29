@@ -1,6 +1,6 @@
 package com.dicoding.submission.jetpack.data.dataSource.remote.filmDataSource
 
-import com.dicoding.submission.jetpack.data.dataSource.DataSource
+import com.dicoding.submission.jetpack.data.dataSource.remote.RemoteDataSource
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.movies.DetailMovieResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.BaseListResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.ResultsItemMovie
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class FilmDataSourceImpl  constructor(
     private val apiService: ApiService
-): DataSource.FilmDataSource {
+): RemoteDataSource.FilmDataSource {
     override suspend fun getDiscoverFilm(): Flow<BaseListResponse<ResultsItemMovie>> {
         return flow {
             val request = apiService.getDiscoverMovie()

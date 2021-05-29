@@ -1,6 +1,6 @@
 package com.dicoding.submission.jetpack.data.dataSource.remote.tvShowDataSource
 
-import com.dicoding.submission.jetpack.data.dataSource.DataSource
+import com.dicoding.submission.jetpack.data.dataSource.remote.RemoteDataSource
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.tvShow.DetailTvShowResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.BaseListResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.ResultsItemTv
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class TvShowDataSourceImpl constructor(
     private val apiService: ApiService
-): DataSource.TvShowDataSource {
+): RemoteDataSource.TvShowDataSource {
     override suspend fun getDiscoverTv(): Flow<BaseListResponse<ResultsItemTv>> {
         return flow {
             val request = apiService.getDiscoverTv()
