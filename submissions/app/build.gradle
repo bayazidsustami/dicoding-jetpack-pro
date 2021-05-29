@@ -48,7 +48,7 @@ dependencies {
 
     //Kotlin coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineAndroidVersion"
 
     //ui
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
@@ -63,6 +63,14 @@ dependencies {
     //viewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+
+    //room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
+    //pagination
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
     //network
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
