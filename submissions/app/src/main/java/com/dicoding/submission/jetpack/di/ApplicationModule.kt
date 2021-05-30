@@ -4,7 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import com.dicoding.submission.jetpack.data.dataSource.FilmRepository
 import com.dicoding.submission.jetpack.data.dataSource.TvShowRepository
+import com.dicoding.submission.jetpack.data.dataSource.local.FilmLocalDataSourceImpl
+import com.dicoding.submission.jetpack.data.dataSource.local.LocalDataSource
+import com.dicoding.submission.jetpack.data.dataSource.local.room.FilmDao
 import com.dicoding.submission.jetpack.data.dataSource.local.room.FilmExplorerDatabase
+import com.dicoding.submission.jetpack.data.dataSource.local.room.TvShowDao
+import com.dicoding.submission.jetpack.data.dataSource.remote.RemoteDataSource
 import com.dicoding.submission.jetpack.data.dataSource.remote.filmDataSource.FilmDataSourceImpl
 import com.dicoding.submission.jetpack.data.dataSource.remote.tvShowDataSource.TvShowDataSourceImpl
 import com.dicoding.submission.jetpack.network.ApiBuilder
@@ -31,7 +36,7 @@ object ApplicationModule {
 
     val repositoryModule = module {
         single {
-            FilmRepository(get(), get())
+            FilmRepository(get(), get(), get())
         }
         single { TvShowRepository(get(), get()) }
     }
@@ -42,14 +47,20 @@ object ApplicationModule {
     }
 
     val dataSourceModule = module {
-        fun provideMovieDataSource(apiService: ApiService): FilmDataSourceImpl{
+        fun provideMovieRemoteDataSource(apiService: ApiService): RemoteDataSource.FilmDataSource{
             return FilmDataSourceImpl(apiService)
         }
-        fun provideTvDataSource(apiService: ApiService): TvShowDataSourceImpl{
+        fun provideTvRemoteDataSource(apiService: ApiService): RemoteDataSource.TvShowDataSource{
             return TvShowDataSourceImpl(apiService)
         }
-        single { provideMovieDataSource(get()) }
-        single { provideTvDataSource(get()) }
+
+        fun provideMovieLocalDataSource(filmDao: FilmDao): LocalDataSource.FilmDataSource{
+            return FilmLocalDataSourceImpl(filmDao)
+        }
+
+        single { provideMovieRemoteDataSource(get()) }
+        single { provideTvRemoteDataSource(get()) }
+        single { provideMovieLocalDataSource(get()) }
     }
 
     val databaseModule = module {
@@ -61,7 +72,18 @@ object ApplicationModule {
             ).build()
         }
 
+        fun provideFilmDao(database: FilmExplorerDatabase): FilmDao{
+            return database.filmDao()
+        }
+
+        fun provideTvDao(database: FilmExplorerDatabase): TvShowDao{
+            return database.tvShowDao()
+        }
+
         single { provideAppDatabase(androidApplication()) }
+        single { provideFilmDao(get()) }
+        single { provideTvDao(get()) }
+
     }
 
     val coroutineScopeModule = module {

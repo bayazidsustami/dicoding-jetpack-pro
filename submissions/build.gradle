@@ -28,7 +28,7 @@ buildscript {
         koinVersion = "3.0.2"
         roomVersion = "2.3.0"
         roomRuntimeVersion = "2.2.3"
-        pagingVersion = "3.0.0"
+        pagingVersion = "2.1.1"
     }
     repositories {
         google()

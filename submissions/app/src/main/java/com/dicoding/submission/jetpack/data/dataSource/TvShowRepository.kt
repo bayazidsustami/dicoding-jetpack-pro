@@ -34,7 +34,8 @@ class TvShowRepository(
                     TvShowsEntity(
                         result?.id.toString(),
                         "${DataDummy.BASE_POSTER_PATH}${result?.posterPath}",
-                        result?.originalName!!
+                        result?.originalName!!,
+                        false
                     )
                 }
                 tvResult.postValue(Result.Success(data = afterMap as List<TvShowsEntity>))

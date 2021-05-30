@@ -22,5 +22,5 @@ data class TvShowsEntity(
         val title: String,
 
         @ColumnInfo(name = "isFavorite")
-        val isFavorite: String
+        val isFavorite: Boolean
 ): Parcelable

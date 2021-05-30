@@ -25,7 +25,7 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(
             setDisplayHomeAsUpEnabled(true)
         }
 
-        viewModel.getDetailMovie().observe(this){ result ->
+        viewModel.detailMovie.observe(this){ result ->
             when(result){
                 is Result.Loading -> {
                     bind.progressBar.visible()
@@ -41,8 +41,6 @@ class DetailMovieActivity : BaseActivity<ActivityDetailMovieBinding>(
                 }
             }
         }
-
-
     }
 
     private fun showDetail(

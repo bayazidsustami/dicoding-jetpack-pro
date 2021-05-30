@@ -1,10 +1,10 @@
 package com.dicoding.submission.jetpack.data.dataSource.local
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.dicoding.submission.jetpack.data.dataSource.local.room.FilmDao
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
-import kotlinx.coroutines.flow.Flow
 
 class FilmLocalDataSourceImpl(
     private val filmDao: FilmDao
@@ -13,7 +13,15 @@ class FilmLocalDataSourceImpl(
         return filmDao.getListFilm(isFavorite)
     }
 
-    override fun getDetailFilm(idFilm: String): Flow<DetailMovieEntity> {
+    override fun getDetailFilm(idFilm: String): LiveData<DetailMovieEntity> {
         return filmDao.getDetailFilm(idFilm)
+    }
+
+    override suspend fun insertListFilm(films: List<MoviesEntity>) {
+        filmDao.insertListFilm(films)
+    }
+
+    override suspend fun insertDetailFilm(film: DetailMovieEntity) {
+        filmDao.insertDetailFilm(film)
     }
 }
