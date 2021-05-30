@@ -66,6 +66,7 @@ dependencies {
 
     //room
     implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     kapt "androidx.room:room-compiler:$roomVersion"
 
     //pagination

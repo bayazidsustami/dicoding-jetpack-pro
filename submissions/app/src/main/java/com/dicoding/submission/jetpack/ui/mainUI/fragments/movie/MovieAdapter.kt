@@ -18,6 +18,8 @@ class MovieAdapter: PagedListAdapter<MoviesEntity, MovieAdapter.ViewHolder>(DIFF
         this.onItemClickListener = onItemClickListener
     }
 
+    var onItemSelected: ((MoviesEntity) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
                 parent.inflating(ItemListMovieBinding::inflate)
@@ -38,7 +40,7 @@ class MovieAdapter: PagedListAdapter<MoviesEntity, MovieAdapter.ViewHolder>(DIFF
             binding.imgPoster.loadImage(itemView.context, data.posterPath)
             binding.tvTitle.text = data.title
             binding.root.setOnClickListener {
-                onItemClickListener.onClick(data)
+                onItemSelected?.invoke(data)
             }
         }
     }

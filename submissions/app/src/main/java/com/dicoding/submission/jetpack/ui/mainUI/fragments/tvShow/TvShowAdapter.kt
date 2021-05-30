@@ -18,6 +18,8 @@ class TvShowAdapter :PagedListAdapter<TvShowsEntity, TvShowAdapter.ViewHolder>(D
         this.onItemClickListener = onItemClickListener
     }
 
+    var onItemSelected: ((TvShowsEntity) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             parent.inflating(ItemListMovieBinding::inflate)
@@ -39,7 +41,7 @@ class TvShowAdapter :PagedListAdapter<TvShowsEntity, TvShowAdapter.ViewHolder>(D
             binding.imgPoster.loadImage(itemView.context, data.posterPath)
             binding.tvTitle.text = data.title
             binding.root.setOnClickListener {
-                onItemClickListener.onClick(data)
+                onItemSelected?.invoke(data)
             }
         }
     }
