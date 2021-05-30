@@ -17,6 +17,10 @@ class TvShowLocalDataSourceImpl(
         return tvShowDao.getDetailTv(idTv)
     }
 
+    override suspend fun updateTvShow(tvShow: TvShowsEntity) {
+        tvShowDao.updateTv(tvShow)
+    }
+
     override suspend fun insertTvShow(tvShows: List<TvShowsEntity>) {
         tvShowDao.insertTv(tvShows)
     }

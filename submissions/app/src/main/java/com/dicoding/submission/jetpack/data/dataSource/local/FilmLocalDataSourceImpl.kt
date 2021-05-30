@@ -17,6 +17,10 @@ class FilmLocalDataSourceImpl(
         return filmDao.getDetailFilm(idFilm)
     }
 
+    override suspend fun updateFilm(film: MoviesEntity) {
+        filmDao.updateMovie(film)
+    }
+
     override suspend fun insertListFilm(films: List<MoviesEntity>) {
         filmDao.insertListFilm(films)
     }

@@ -2,10 +2,7 @@ package com.dicoding.submission.jetpack.data.dataSource.local.room
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 
@@ -16,6 +13,9 @@ interface TvShowDao {
 
     @Query("SELECT * FROM detailtvshowentity WHERE tvId = :tvId")
     fun getDetailTv(tvId: String): LiveData<DetailTvShowsEntity>
+
+    @Update
+    suspend fun updateTv(tvShow: TvShowsEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTv(tvShows: List<TvShowsEntity>)

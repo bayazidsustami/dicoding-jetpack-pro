@@ -2,10 +2,7 @@ package com.dicoding.submission.jetpack.data.dataSource.local.room
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 
@@ -16,6 +13,9 @@ interface FilmDao {
 
     @Query("SELECT * FROM detailmoviesentity WHERE movieId = :movieId")
     fun getDetailFilm(movieId: String): LiveData<DetailMovieEntity>
+
+    @Update
+    suspend fun updateMovie(movie: MoviesEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertListFilm(films: List<MoviesEntity>)

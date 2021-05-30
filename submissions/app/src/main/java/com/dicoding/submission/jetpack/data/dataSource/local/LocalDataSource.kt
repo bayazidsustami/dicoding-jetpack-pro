@@ -12,6 +12,7 @@ interface LocalDataSource {
         fun getListFilm(isFavorite: Boolean): DataSource.Factory<Int, MoviesEntity>
         fun getDetailFilm(idFilm: String): LiveData<DetailMovieEntity>
 
+        suspend fun updateFilm(film: MoviesEntity)
         suspend fun insertListFilm(films: List<MoviesEntity>)
         suspend fun insertDetailFilm(film: DetailMovieEntity)
     }
@@ -20,6 +21,7 @@ interface LocalDataSource {
         fun getListTv(isFavorite: Boolean): DataSource.Factory<Int, TvShowsEntity>
         fun getDetailTv(idTv: String): LiveData<DetailTvShowsEntity>
 
+        suspend fun updateTvShow(tvShow: TvShowsEntity)
         suspend fun insertTvShow(tvShows: List<TvShowsEntity>)
         suspend fun insertDetailTvShow(tvShow: DetailTvShowsEntity)
     }
