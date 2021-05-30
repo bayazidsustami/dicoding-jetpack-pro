@@ -14,6 +14,8 @@ import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.utils.DataDummy.BASE_POSTER_PATH
 import com.dicoding.submission.jetpack.utils.Result
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class TvShowRepository(
     private val remoteDataSource: RemoteDataSource.TvShowDataSource,
@@ -25,8 +27,8 @@ class TvShowRepository(
             override fun loadFromDB(): LiveData<PagedList<TvShowsEntity>> {
                 val config = PagedList.Config.Builder()
                     .setEnablePlaceholders(false)
-                    .setInitialLoadSizeHint(5)
-                    .setPageSize(5)
+                    .setInitialLoadSizeHint(PAGE_SIZE)
+                    .setPageSize(PAGE_SIZE)
                     .build()
                 return LivePagedListBuilder(localDataSource.getListTv(false), config).build()
             }
@@ -84,5 +86,25 @@ class TvShowRepository(
                 localDataSource.insertDetailTvShow(mapData)
             }
         }.asLiveData()
+    }
+
+    fun updateTvShow(tvShow: TvShowsEntity, isFavorite: Boolean){
+        coroutineScope.launch(Dispatchers.IO){
+            tvShow.isFavorite = isFavorite
+            localDataSource.updateTvShow(tvShow)
+        }
+    }
+
+    fun getFavoriteTvShow(): LiveData<PagedList<TvShowsEntity>>{
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(PAGE_SIZE)
+            .setPageSize(PAGE_SIZE)
+            .build()
+        return LivePagedListBuilder(localDataSource.getListTv(true), config).build()
+    }
+
+    companion object{
+        private const val PAGE_SIZE = 5
     }
 }

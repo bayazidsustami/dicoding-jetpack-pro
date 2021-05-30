@@ -13,17 +13,17 @@ data class MoviesEntity(
         @PrimaryKey
         @NonNull
         @ColumnInfo(name = "movieId")
-        val id: String,
+        var id: String,
 
         @ColumnInfo(name = "posterPath")
-        val posterPath: String,
+        var posterPath: String,
 
         @ColumnInfo(name = "title")
-        val title: String,
+        var title: String,
 
         @ColumnInfo(name = "releaseDate")
-        val releaseDate: String,
+        var releaseDate: String,
 
         @ColumnInfo(name = "isFavorite")
-        val isFavorite: Boolean = false
+        var isFavorite: Boolean = false
 ): Parcelable

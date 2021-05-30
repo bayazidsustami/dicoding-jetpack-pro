@@ -13,14 +13,14 @@ data class TvShowsEntity(
         @PrimaryKey
         @NonNull
         @ColumnInfo(name = "tvId")
-        val id: String,
+        var id: String,
 
         @ColumnInfo(name = "posterPath")
-        val posterPath: String,
+        var posterPath: String,
 
         @ColumnInfo(name = "title")
-        val title: String,
+        var title: String,
 
         @ColumnInfo(name = "isFavorite")
-        val isFavorite: Boolean
+        var isFavorite: Boolean
 ): Parcelable

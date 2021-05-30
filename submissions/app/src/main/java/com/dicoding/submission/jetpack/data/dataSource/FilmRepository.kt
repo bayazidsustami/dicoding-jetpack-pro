@@ -14,6 +14,8 @@ import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.utils.DataDummy.BASE_POSTER_PATH
 import com.dicoding.submission.jetpack.utils.Result
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FilmRepository constructor(
     private val remoteDataSource: RemoteDataSource.FilmDataSource,
@@ -25,8 +27,8 @@ class FilmRepository constructor(
             override fun loadFromDB(): LiveData<PagedList<MoviesEntity>> {
                 val config = PagedList.Config.Builder()
                     .setEnablePlaceholders(false)
-                    .setInitialLoadSizeHint(5)
-                    .setPageSize(5)
+                    .setInitialLoadSizeHint(PAGE_SIZE)
+                    .setPageSize(PAGE_SIZE)
                     .build()
 
                 return LivePagedListBuilder(localDataSource.getListFilm(false), config).build()
@@ -81,5 +83,26 @@ class FilmRepository constructor(
                 localDataSource.insertDetailFilm(mapData)
             }
         }.asLiveData()
+    }
+
+    fun updateMovie(movie: MoviesEntity, isFavorite: Boolean){
+        coroutineScope.launch(Dispatchers.IO) {
+            movie.isFavorite = isFavorite
+            localDataSource.updateFilm(movie)
+        }
+    }
+
+    fun getFavoriteMovie(): LiveData<PagedList<MoviesEntity>>{
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(PAGE_SIZE)
+            .setPageSize(PAGE_SIZE)
+            .build()
+
+        return LivePagedListBuilder(localDataSource.getListFilm(true), config).build()
+    }
+
+    companion object{
+        private const val PAGE_SIZE = 5
     }
 }
