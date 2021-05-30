@@ -59,9 +59,12 @@ abstract class NetworkBoundResource<ResultType, RequestType>(
                     is ApiResult.Success -> {
                         coroutineScope.launch(Dispatchers.IO) {
                             saveCallResult(response.data)
-                        }
-                        result.addSource(loadFromDB()){newData->
-                            result.value = Result.Success(data = newData)
+
+                            coroutineScope.launch(Dispatchers.Main) {
+                                result.addSource(loadFromDB()){newData->
+                                    result.value = Result.Success(data = newData)
+                                }
+                            }
                         }
                     }
                     is ApiResult.Error -> {
