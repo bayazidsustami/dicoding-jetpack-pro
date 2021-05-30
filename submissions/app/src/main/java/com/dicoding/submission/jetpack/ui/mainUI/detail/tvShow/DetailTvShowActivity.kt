@@ -24,7 +24,7 @@ class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
                 setDisplayHomeAsUpEnabled(true)
             }
 
-            viewModel.getDetailTvShow().observe(this){result ->
+            viewModel.tvDetail.observe(this){result ->
                 when(result){
                     is Result.Loading -> {
                         bind.progressBar.visible()

@@ -38,7 +38,7 @@ class TvShowFragment: BaseFragment<FragmentTvBinding>(
                 }
                 is Result.Success -> {
                     bind.progressBar.gone()
-                    tvAdapter.setData(result.data)
+                    tvAdapter.submitList(result.data)
                 }
             }
         }

@@ -6,7 +6,6 @@ import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
-import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
     interface FilmDataSource{
@@ -18,7 +17,10 @@ interface LocalDataSource {
     }
 
     interface TvShowDataSource{
-        suspend fun getListTv(isFavorite: Boolean): Flow<List<TvShowsEntity>>
-        suspend fun getDetailTv(idTv: String): Flow<DetailTvShowsEntity>
+        fun getListTv(isFavorite: Boolean): DataSource.Factory<Int, TvShowsEntity>
+        fun getDetailTv(idTv: String): LiveData<DetailTvShowsEntity>
+
+        suspend fun insertTvShow(tvShows: List<TvShowsEntity>)
+        suspend fun insertDetailTvShow(tvShow: DetailTvShowsEntity)
     }
 }

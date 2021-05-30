@@ -6,6 +6,7 @@ import com.dicoding.submission.jetpack.data.dataSource.FilmRepository
 import com.dicoding.submission.jetpack.data.dataSource.TvShowRepository
 import com.dicoding.submission.jetpack.data.dataSource.local.FilmLocalDataSourceImpl
 import com.dicoding.submission.jetpack.data.dataSource.local.LocalDataSource
+import com.dicoding.submission.jetpack.data.dataSource.local.TvShowLocalDataSourceImpl
 import com.dicoding.submission.jetpack.data.dataSource.local.room.FilmDao
 import com.dicoding.submission.jetpack.data.dataSource.local.room.FilmExplorerDatabase
 import com.dicoding.submission.jetpack.data.dataSource.local.room.TvShowDao
@@ -38,7 +39,7 @@ object ApplicationModule {
         single {
             FilmRepository(get(), get(), get())
         }
-        single { TvShowRepository(get(), get()) }
+        single { TvShowRepository(get(), get(), get()) }
     }
 
     val adapterModule = module {
@@ -58,9 +59,14 @@ object ApplicationModule {
             return FilmLocalDataSourceImpl(filmDao)
         }
 
+        fun provideTvLocalDataSource(tvShowDao: TvShowDao): LocalDataSource.TvShowDataSource{
+            return TvShowLocalDataSourceImpl(tvShowDao)
+        }
+
         single { provideMovieRemoteDataSource(get()) }
         single { provideTvRemoteDataSource(get()) }
         single { provideMovieLocalDataSource(get()) }
+        single { provideTvLocalDataSource(get()) }
     }
 
     val databaseModule = module {

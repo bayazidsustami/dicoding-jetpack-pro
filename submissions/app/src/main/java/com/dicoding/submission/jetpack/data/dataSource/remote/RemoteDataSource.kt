@@ -14,7 +14,7 @@ interface RemoteDataSource {
          suspend fun getDetailFilm(idMovie: String): LiveData<ApiResult<DetailMovieResponse>>
     }
     interface TvShowDataSource{
-        suspend fun getDiscoverTv(): Flow<BaseListResponse<ResultsItemTv>>
-        suspend fun getDetailTv(idTv: String): Flow<DetailTvShowResponse>
+        suspend fun getDiscoverTv(): LiveData<ApiResult<BaseListResponse<ResultsItemTv>>>
+        suspend fun getDetailTv(idTv: String): LiveData<ApiResult<DetailTvShowResponse>>
     }
 }

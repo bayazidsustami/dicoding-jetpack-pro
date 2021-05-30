@@ -1,7 +1,6 @@
 package com.dicoding.submission.jetpack.ui.mainUI.fragments.movie
 
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
