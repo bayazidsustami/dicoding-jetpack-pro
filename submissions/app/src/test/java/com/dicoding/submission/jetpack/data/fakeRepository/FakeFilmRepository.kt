@@ -2,62 +2,113 @@ package com.dicoding.submission.jetpack.data.fakeRepository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.dicoding.submission.jetpack.data.dataSource.NetworkBoundResource
+import com.dicoding.submission.jetpack.data.dataSource.local.LocalDataSource
+import com.dicoding.submission.jetpack.data.dataSource.remote.ApiResult
+import com.dicoding.submission.jetpack.data.dataSource.remote.RemoteDataSource
 import com.dicoding.submission.jetpack.data.dataSource.remote.filmDataSource.FilmDataSourceImpl
+import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.movies.DetailMovieResponse
+import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.BaseListResponse
+import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.ResultsItemMovie
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.utils.DataDummy
 import com.dicoding.submission.jetpack.utils.Result
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class FakeFilmRepository constructor(
-    private val remoteDataSource: FilmDataSourceImpl,
+    private val remoteDataSource: RemoteDataSource.FilmDataSource,
+    private val localDataSource: LocalDataSource.FilmDataSource,
     private val coroutineScope: CoroutineScope
 ) {
-    fun getDiscoverMovie(): LiveData<Result<List<MoviesEntity>>> {
-        val movieListResult = MutableLiveData<Result<List<MoviesEntity>>>()
-        coroutineScope.launch {
-            remoteDataSource.getDiscoverFilm().onStart {
-                movieListResult.postValue(Result.Loading<List<MoviesEntity>>(data = null))
-            }.catch {
-                movieListResult.postValue(Result.Error<List<MoviesEntity>>(data = null, message = it.message))
-            }.collect {
-                val dataToMap = it.results
-                val afterMap = dataToMap?.mapNotNull { result ->
+    fun getDiscoverMovie(): LiveData<Result<PagedList<MoviesEntity>>> {
+        return object : NetworkBoundResource<PagedList<MoviesEntity>, BaseListResponse<ResultsItemMovie>>(coroutineScope){
+            override fun loadFromDB(): LiveData<PagedList<MoviesEntity>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(PAGE_SIZE)
+                    .setPageSize(PAGE_SIZE)
+                    .build()
+
+                return LivePagedListBuilder(localDataSource.getListFilm(), config).build()
+            }
+
+            override fun shouldFetch(data: PagedList<MoviesEntity>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+
+            override suspend fun createCall(): LiveData<ApiResult<BaseListResponse<ResultsItemMovie>>> {
+                return remoteDataSource.getDiscoverFilm()
+            }
+
+            override suspend fun saveCallResult(data: BaseListResponse<ResultsItemMovie>) {
+                val mapData = data.results?.mapNotNull {
                     MoviesEntity(
-                        result?.id.toString(),
-                        "${DataDummy.BASE_POSTER_PATH}${result?.posterPath}",
-                        result?.title!!,
-                        result.releaseDate!!
+                        id = it?.id?.toString()!!,
+                        posterPath = "${DataDummy.BASE_POSTER_PATH}${it.posterPath}",
+                        title = it.title!!,
+                        releaseDate = it.releaseDate!!
                     )
                 }
-                movieListResult.postValue(Result.Success(data = afterMap as List<MoviesEntity>))
+                if (mapData != null){
+                    localDataSource.insertListFilm(mapData)
+                }
             }
-        }
-        return movieListResult
+        }.asLiveData()
     }
 
-    fun getDetailMovie(idMovie: String): LiveData<Result<DetailMovieEntity>> {
-        val detailResult = MutableLiveData<Result<DetailMovieEntity>>()
-        coroutineScope.launch {
-            remoteDataSource.getDetailFilm(idMovie).onStart {
-                detailResult.postValue(Result.Loading<DetailMovieEntity>(data = null))
-            }.catch {
-                detailResult.postValue(Result.Error<DetailMovieEntity>(data = null, message = it.message))
-            }.collect { results ->
-                val dataMap = DetailMovieEntity(
-                    results.id.toString(),
-                    results.homepage!!,
-                    results.title!!,
-                    results.overview!!,
-                    results.status!!
-                )
-                detailResult.postValue(Result.Success(dataMap))
+    fun getDetailMovie(idMovie: String): LiveData<Result<DetailMovieEntity>>{
+        return object : NetworkBoundResource<DetailMovieEntity, DetailMovieResponse>(coroutineScope){
+            override fun loadFromDB(): LiveData<DetailMovieEntity> {
+                return localDataSource.getDetailFilm(idMovie)
             }
+
+            override fun shouldFetch(data: DetailMovieEntity?): Boolean {
+                return data == null
+            }
+
+            override suspend fun createCall(): LiveData<ApiResult<DetailMovieResponse>> {
+                return remoteDataSource.getDetailFilm(idMovie)
+            }
+
+            override suspend fun saveCallResult(data: DetailMovieResponse) {
+                val mapData = DetailMovieEntity(
+                    id = data.id.toString(),
+                    homepage = data.homepage!!,
+                    title = data.title!!,
+                    overview = data.overview!!,
+                    status = data.status!!
+                )
+                localDataSource.insertDetailFilm(mapData)
+            }
+        }.asLiveData()
+    }
+
+    fun updateMovie(movie: MoviesEntity, isFavorite: Boolean){
+        coroutineScope.launch(Dispatchers.IO) {
+            movie.isFavorite = isFavorite
+            localDataSource.updateFilm(movie)
         }
-        return detailResult
+    }
+
+    fun getFavoriteMovie(): LiveData<PagedList<MoviesEntity>>{
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(PAGE_SIZE)
+            .setPageSize(PAGE_SIZE)
+            .build()
+
+        return LivePagedListBuilder(localDataSource.getListFilmFavorite(), config).build()
+    }
+
+    companion object{
+        private const val PAGE_SIZE = 5
     }
 }
