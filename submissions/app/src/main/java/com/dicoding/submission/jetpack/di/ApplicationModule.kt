@@ -18,6 +18,7 @@ import com.dicoding.submission.jetpack.network.ApiService
 import com.dicoding.submission.jetpack.ui.mainUI.detail.movie.DetailMovieViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.detail.tvShow.DetailTvShowViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieAdapter
+import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieFavoriteViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowAdapter
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowViewModel
@@ -30,6 +31,7 @@ import org.koin.dsl.module
 object ApplicationModule {
     val viewModelModule = module {
         viewModel { MovieViewModel(get()) }
+        viewModel { MovieFavoriteViewModel(get()) }
         viewModel { DetailMovieViewModel(get()) }
         viewModel { TvShowViewModel(get()) }
         viewModel { DetailTvShowViewModel(get()) }
@@ -43,8 +45,8 @@ object ApplicationModule {
     }
 
     val adapterModule = module {
-        single { MovieAdapter() }
-        single { TvShowAdapter() }
+        factory { MovieAdapter() }
+        factory { TvShowAdapter() }
     }
 
     val dataSourceModule = module {

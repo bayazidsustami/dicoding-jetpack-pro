@@ -31,7 +31,7 @@ class FilmRepository constructor(
                     .setPageSize(PAGE_SIZE)
                     .build()
 
-                return LivePagedListBuilder(localDataSource.getListFilm(false), config).build()
+                return LivePagedListBuilder(localDataSource.getListFilm(), config).build()
             }
 
             override fun shouldFetch(data: PagedList<MoviesEntity>?): Boolean {
@@ -99,7 +99,7 @@ class FilmRepository constructor(
             .setPageSize(PAGE_SIZE)
             .build()
 
-        return LivePagedListBuilder(localDataSource.getListFilm(true), config).build()
+        return LivePagedListBuilder(localDataSource.getListFilmFavorite(), config).build()
     }
 
     companion object{

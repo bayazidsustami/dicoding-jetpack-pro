@@ -8,8 +8,11 @@ import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 
 @Dao
 interface FilmDao {
+    @Query("SELECT * FROM moviesentity")
+    fun getListFilm(): DataSource.Factory<Int, MoviesEntity>
+
     @Query("SELECT * FROM moviesentity WHERE isFavorite = :isFavorite")
-    fun getListFilm(isFavorite: Boolean): DataSource.Factory<Int, MoviesEntity>
+    fun getFavoriteFilm(isFavorite: Boolean): DataSource.Factory<Int, MoviesEntity>
 
     @Query("SELECT * FROM detailmoviesentity WHERE movieId = :movieId")
     fun getDetailFilm(movieId: String): LiveData<DetailMovieEntity>

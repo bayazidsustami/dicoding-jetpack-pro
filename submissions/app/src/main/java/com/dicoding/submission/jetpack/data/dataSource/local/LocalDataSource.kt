@@ -9,7 +9,8 @@ import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 
 interface LocalDataSource {
     interface FilmDataSource{
-        fun getListFilm(isFavorite: Boolean): DataSource.Factory<Int, MoviesEntity>
+        fun getListFilm(): DataSource.Factory<Int, MoviesEntity>
+        fun getListFilmFavorite(): DataSource.Factory<Int, MoviesEntity>
         fun getDetailFilm(idFilm: String): LiveData<DetailMovieEntity>
 
         suspend fun updateFilm(film: MoviesEntity)

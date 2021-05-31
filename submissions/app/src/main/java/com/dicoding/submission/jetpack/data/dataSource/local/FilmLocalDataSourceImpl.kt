@@ -9,8 +9,12 @@ import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 class FilmLocalDataSourceImpl(
     private val filmDao: FilmDao
 ): LocalDataSource.FilmDataSource {
-    override fun getListFilm(isFavorite: Boolean): DataSource.Factory<Int, MoviesEntity> {
-        return filmDao.getListFilm(isFavorite)
+    override fun getListFilm(): DataSource.Factory<Int, MoviesEntity> {
+        return filmDao.getListFilm()
+    }
+
+    override fun getListFilmFavorite(): DataSource.Factory<Int, MoviesEntity> {
+        return filmDao.getFavoriteFilm(true)
     }
 
     override fun getDetailFilm(idFilm: String): LiveData<DetailMovieEntity> {
