@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.dicoding.submission.jetpack.data.dataSource.TvShowRepository
+import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
+import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.utils.Result
 
 class DetailTvShowViewModel(
@@ -22,4 +24,7 @@ class DetailTvShowViewModel(
         repository.getDetailTv(it)
     }
 
+    fun setFavorite(movie: TvShowsEntity, isFavorite: Boolean){
+        repository.updateTvShow(movie, isFavorite)
+    }
 }

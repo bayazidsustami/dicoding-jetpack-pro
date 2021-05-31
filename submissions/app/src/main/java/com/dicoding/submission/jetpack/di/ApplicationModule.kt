@@ -21,6 +21,7 @@ import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieAdapter
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieFavoriteViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.movie.MovieViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowAdapter
+import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowFavoriteViewModel
 import com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow.TvShowViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +36,7 @@ object ApplicationModule {
         viewModel { DetailMovieViewModel(get()) }
         viewModel { TvShowViewModel(get()) }
         viewModel { DetailTvShowViewModel(get()) }
+        viewModel { TvShowFavoriteViewModel(get()) }
     }
 
     val repositoryModule = module {
