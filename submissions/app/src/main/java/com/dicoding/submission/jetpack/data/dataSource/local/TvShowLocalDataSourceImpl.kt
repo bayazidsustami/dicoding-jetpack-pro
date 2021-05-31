@@ -9,8 +9,12 @@ import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 class TvShowLocalDataSourceImpl(
     private val tvShowDao: TvShowDao
 ): LocalDataSource.TvShowDataSource {
-    override fun getListTv(isFavorite: Boolean): DataSource.Factory<Int, TvShowsEntity> {
-        return tvShowDao.getListTv(isFavorite)
+    override fun getListTv(): DataSource.Factory<Int, TvShowsEntity> {
+        return tvShowDao.getListTv()
+    }
+
+    override fun getListFavoriteTv(): DataSource.Factory<Int, TvShowsEntity> {
+        return tvShowDao.getListFavoriteTv(true)
     }
 
     override fun getDetailTv(idTv: String): LiveData<DetailTvShowsEntity> {

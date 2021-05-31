@@ -8,8 +8,11 @@ import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 
 @Dao
 interface TvShowDao {
+    @Query("SELECT * FROM tvshowentity")
+    fun getListTv(): DataSource.Factory<Int, TvShowsEntity>
+
     @Query("SELECT * FROM tvshowentity WHERE isFavorite = :isFavorite")
-    fun getListTv(isFavorite: Boolean): DataSource.Factory<Int, TvShowsEntity>
+    fun getListFavoriteTv(isFavorite: Boolean): DataSource.Factory<Int, TvShowsEntity>
 
     @Query("SELECT * FROM detailtvshowentity WHERE tvId = :tvId")
     fun getDetailTv(tvId: String): LiveData<DetailTvShowsEntity>

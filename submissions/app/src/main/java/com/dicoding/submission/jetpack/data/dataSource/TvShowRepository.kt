@@ -30,7 +30,7 @@ class TvShowRepository(
                     .setInitialLoadSizeHint(PAGE_SIZE)
                     .setPageSize(PAGE_SIZE)
                     .build()
-                return LivePagedListBuilder(localDataSource.getListTv(false), config).build()
+                return LivePagedListBuilder(localDataSource.getListTv(), config).build()
             }
 
             override fun shouldFetch(data: PagedList<TvShowsEntity>?): Boolean {
@@ -101,7 +101,7 @@ class TvShowRepository(
             .setInitialLoadSizeHint(PAGE_SIZE)
             .setPageSize(PAGE_SIZE)
             .build()
-        return LivePagedListBuilder(localDataSource.getListTv(true), config).build()
+        return LivePagedListBuilder(localDataSource.getListFavoriteTv(), config).build()
     }
 
     companion object{

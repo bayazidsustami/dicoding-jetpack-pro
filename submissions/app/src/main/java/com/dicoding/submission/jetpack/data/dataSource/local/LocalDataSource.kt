@@ -19,7 +19,8 @@ interface LocalDataSource {
     }
 
     interface TvShowDataSource{
-        fun getListTv(isFavorite: Boolean): DataSource.Factory<Int, TvShowsEntity>
+        fun getListTv(): DataSource.Factory<Int, TvShowsEntity>
+        fun getListFavoriteTv(): DataSource.Factory<Int, TvShowsEntity>
         fun getDetailTv(idTv: String): LiveData<DetailTvShowsEntity>
 
         suspend fun updateTvShow(tvShow: TvShowsEntity)

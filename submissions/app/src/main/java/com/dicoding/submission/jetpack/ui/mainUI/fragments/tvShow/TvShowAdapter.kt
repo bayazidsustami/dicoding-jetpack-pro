@@ -6,17 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.databinding.ItemListMovieBinding
-import com.dicoding.submission.jetpack.ui.mainUI.OnItemClickListener
 import com.dicoding.submission.jetpack.utils.inflating
 import com.dicoding.submission.jetpack.utils.loadImage
 
 class TvShowAdapter :PagedListAdapter<TvShowsEntity, TvShowAdapter.ViewHolder>(DIFF_CALLBACK) {
-
-    private lateinit var onItemClickListener: OnItemClickListener<TvShowsEntity>
-
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener<TvShowsEntity>){
-        this.onItemClickListener = onItemClickListener
-    }
 
     var onItemSelected: ((TvShowsEntity) -> Unit)? = null
 
