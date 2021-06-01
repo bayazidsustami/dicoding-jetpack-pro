@@ -80,4 +80,17 @@ class FilmRepositoryTest{
         assertEquals(DataDummy.generateDetailMovie()[0].overview, result.data.overview)
         assertEquals(DataDummy.generateDetailMovie()[0].status, result.data.status)
     }
+
+    @Test
+    fun `get favorite movie test`() = testCoroutineRule.runBlockingTest {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MoviesEntity>
+
+        `when`(localDataSource.getListFilmFavorite()).thenReturn(dataSourceFactory)
+        repository.getFavoriteMovie()
+
+        val dataMovie = PagedListUtils.mockPagedList(DataDummy.generateMovieData())
+        verify(localDataSource).getListFilmFavorite()
+        assertNotNull(dataMovie)
+        assertEquals(DataDummy.generateMovieData().size, dataMovie.size)
+    }
 }

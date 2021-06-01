@@ -1,6 +1,8 @@
 package com.dicoding.submission.jetpack.data.dataSource
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.paging.DataSource
+import com.dicoding.submission.jetpack.PagedListUtils
 import com.dicoding.submission.jetpack.TestCoroutineRule
 import com.dicoding.submission.jetpack.data.dataSource.local.LocalDataSource
 import com.dicoding.submission.jetpack.data.dataSource.remote.RemoteDataSource
@@ -8,6 +10,7 @@ import com.dicoding.submission.jetpack.data.dataSource.remote.tvShowDataSource.T
 import com.dicoding.submission.jetpack.data.fakeRepository.FakeTvShowRepository
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
+import com.dicoding.submission.jetpack.utils.DataDummy
 import com.dicoding.submission.jetpack.utils.DataDummy.BASE_POSTER_PATH
 import com.dicoding.submission.jetpack.utils.DummyResponse
 import com.dicoding.submission.jetpack.utils.LiveDataTestUtils
@@ -50,19 +53,19 @@ class TvShowRepositoryTest{
         repository = FakeTvShowRepository(remoteDataSource, localDataSource, coroutineScope)
     }
 
-    /*@Test
+    @Test
     fun `get all tvShows`() = testCoroutineRule.runBlockingTest {
-        val flow = flow {
-            emit(DummyResponse.getDummyListTvShow())
-        }
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvShowsEntity>
 
-        `when`(dataSource.getDiscoverTv()).thenReturn(flow)
-        val data = LiveDataTestUtils.getValue(repository.getDiscoverTv())
-        val dataResult = data as Result.Success<List<TvShowsEntity>>
-        verify(dataSource).getDiscoverTv()
+        `when`(localDataSource.getListTv()).thenReturn(dataSourceFactory)
+        repository.getDiscoverTv()
+
+        val data = Result.Success(data = PagedListUtils.mockPagedList(DataDummy.generateListTvShow()))
+
+        verify(localDataSource).getListTv()
         assertNotNull(data)
-        assertEquals(DummyResponse.getDummyListTvShow().results?.size, dataResult.data.size)
-    }*/
+        assertEquals(DataDummy.generateListTvShow().size, data.data.size)
+    }
 
     /*@Test
     fun `get detail tv show`() = testCoroutineRule.runBlockingTest {
