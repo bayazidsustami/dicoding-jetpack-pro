@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.dicoding.submission.jetpack.data.dataSource.FilmRepository
 import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.utils.DataDummy
+import com.dicoding.submission.jetpack.utils.LiveDataTestUtils
 import com.dicoding.submission.jetpack.utils.Result
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -45,44 +46,47 @@ class DetailMovieViewModelTest {
 
     @Test
     fun `loading getDetail movie`(){
-        /*val result = MutableLiveData<Result<DetailMovieEntity>>()
-        result.value = Result.Loading(data = null)
-
         val loadingState = Result.Loading(data = null)
+
+        val result = MutableLiveData<Result<DetailMovieEntity>>()
+        result.value = loadingState
+
         `when`(repository.getDetailMovie(movieId)).thenReturn(result)
-        val details = viewModel.getDetailMovie().value
+        val details = LiveDataTestUtils.getValue(viewModel.detailMovie)
         verify(repository).getDetailMovie(movieId)
         assertNotNull(details)
         assertEquals(loadingState, details)
 
-        viewModel.getDetailMovie().observeForever(observer)
-        verify(observer).onChanged(loadingState)*/
+        viewModel.detailMovie.observeForever(observer)
+        verify(observer).onChanged(loadingState)
     }
 
     @Test
     fun `error getDetail movie`(){
-        /*val result = MutableLiveData<Result<DetailMovieEntity>>()
-        result.value = Result.Error(data = null, message = "Error")
-
         val errorState = Result.Error(data = null, message = "Error")
+
+        val result = MutableLiveData<Result<DetailMovieEntity>>()
+        result.value = errorState
+
         `when`(repository.getDetailMovie(movieId)).thenReturn(result)
-        val details = viewModel.getDetailMovie().value
+        val details = LiveDataTestUtils.getValue(viewModel.detailMovie)
         verify(repository).getDetailMovie(movieId)
         assertNotNull(details)
         assertEquals(errorState, details)
 
-        viewModel.getDetailMovie().observeForever(observer)
-        verify(observer).onChanged(errorState)*/
+        viewModel.detailMovie.observeForever(observer)
+        verify(observer).onChanged(errorState)
     }
 
     @Test
     fun `success get detail data movie test`(){
-        /*val result = MutableLiveData<Result<DetailMovieEntity>>()
-        result.value = Result.Success(data = dataDetail)
-
         val successState = Result.Success(data = dataDetail)
+
+        val result = MutableLiveData<Result<DetailMovieEntity>>()
+        result.value = successState
+
         `when`(repository.getDetailMovie(movieId)).thenReturn(result)
-        val details = viewModel.getDetailMovie().value
+        val details = LiveDataTestUtils.getValue(viewModel.detailMovie)
         val detailData = details as Result.Success<DetailMovieEntity>
 
         verify(repository).getDetailMovie(movieId)
@@ -94,7 +98,7 @@ class DetailMovieViewModelTest {
         assertEquals(dataDetail.status, detailData.data.status)
         assertEquals(dataDetail.title, detailData.data.title)
 
-        viewModel.getDetailMovie().observeForever(observer)
-        verify(observer).onChanged(successState)*/
+        viewModel.detailMovie.observeForever(observer)
+        verify(observer).onChanged(successState)
     }
 }
