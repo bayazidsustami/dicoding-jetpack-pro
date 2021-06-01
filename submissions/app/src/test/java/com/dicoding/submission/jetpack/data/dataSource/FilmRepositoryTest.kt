@@ -1,14 +1,17 @@
 package com.dicoding.submission.jetpack.data.dataSource
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.dicoding.submission.jetpack.PagedListUtils
 import com.dicoding.submission.jetpack.TestCoroutineRule
 import com.dicoding.submission.jetpack.data.dataSource.local.LocalDataSource
 import com.dicoding.submission.jetpack.data.dataSource.remote.RemoteDataSource
 import com.dicoding.submission.jetpack.data.fakeRepository.FakeFilmRepository
+import com.dicoding.submission.jetpack.data.movie.DetailMovieEntity
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.utils.DataDummy
+import com.dicoding.submission.jetpack.utils.LiveDataTestUtils
 import com.dicoding.submission.jetpack.utils.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +27,7 @@ import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(MockitoJUnitRunner.Silent::class)
 class FilmRepositoryTest{
 
     @get:Rule
@@ -62,20 +65,19 @@ class FilmRepositoryTest{
 
     @Test
     fun `get detail movie`() = testCoroutineRule.runBlockingTest {
-        /*val flow = flow {
-            emit(DummyResponse.getDummyDetailMovie())
-        }
+        val results = MutableLiveData<DetailMovieEntity>()
+        results.value = DataDummy.generateDetailMovie()[0]
 
-        `when`(remoteDataSource.getDetailFilm(anyString())).thenReturn(flow)
+        `when`(localDataSource.getDetailFilm(anyString())).thenReturn(results)
 
         val data = LiveDataTestUtils.getValue(repository.getDetailMovie(anyString()))
         val result = data as Result.Success<DetailMovieEntity>
-        verify(remoteDataSource).getDetailFilm(anyString())
+        verify(localDataSource).getDetailFilm(anyString())
         assertNotNull(data)
-        assertEquals(DummyResponse.getDummyDetailMovie().homepage, result.data.homepage)
-        assertEquals(DummyResponse.getDummyDetailMovie().id.toString(), result.data.id)
-        assertEquals(DummyResponse.getDummyDetailMovie().title, result.data.title)
-        assertEquals(DummyResponse.getDummyDetailMovie().overview, result.data.overview)
-        assertEquals(DummyResponse.getDummyDetailMovie().status, result.data.status)*/
+        assertEquals(DataDummy.generateDetailMovie()[0].homepage, result.data.homepage)
+        assertEquals(DataDummy.generateDetailMovie()[0].id, result.data.id)
+        assertEquals(DataDummy.generateDetailMovie()[0].title, result.data.title)
+        assertEquals(DataDummy.generateDetailMovie()[0].overview, result.data.overview)
+        assertEquals(DataDummy.generateDetailMovie()[0].status, result.data.status)
     }
 }
