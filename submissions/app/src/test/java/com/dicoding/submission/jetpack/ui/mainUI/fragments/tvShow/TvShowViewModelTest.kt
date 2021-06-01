@@ -3,9 +3,9 @@ package com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.dicoding.submission.jetpack.data.dataSource.TvShowRepository
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
-import com.dicoding.submission.jetpack.utils.DataDummy
 import com.dicoding.submission.jetpack.utils.Result
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -30,9 +30,10 @@ class TvShowViewModelTest {
     private lateinit var repository: TvShowRepository
 
     @Mock
-    private lateinit var observer: Observer<Result<List<TvShowsEntity>>>
+    private lateinit var observer: Observer<Result<PagedList<TvShowsEntity>>>
 
-    private val dummyTv = DataDummy.generateListTvShow()
+    @Mock
+    private lateinit var pagedList: PagedList<TvShowsEntity>
 
 
     @Before
@@ -42,7 +43,7 @@ class TvShowViewModelTest {
 
     @Test
     fun `loading get data tv shows`(){
-        /*val result = MutableLiveData<Result<List<TvShowsEntity>>>()
+        val result = MutableLiveData<Result<PagedList<TvShowsEntity>>>()
         result.value = Result.Loading(data = null)
 
         val loadingState = Result.Loading(data = null)
@@ -53,12 +54,12 @@ class TvShowViewModelTest {
         assertEquals(loadingState, tvShows)
 
         viewModel.getListTvShows().observeForever(observer)
-        verify(observer).onChanged(loadingState)*/
+        verify(observer).onChanged(loadingState)
     }
 
     @Test
     fun `error get data tv shows`(){
-        /*val result = MutableLiveData<Result<List<TvShowsEntity>>>()
+        val result = MutableLiveData<Result<PagedList<TvShowsEntity>>>()
         result.value = Result.Error(data = null, message = "Error")
 
         val errorState = Result.Error(data = null, message = "Error")
@@ -70,24 +71,26 @@ class TvShowViewModelTest {
         assertEquals(errorState, tvShows)
 
         viewModel.getListTvShows().observeForever(observer)
-        verify(observer).onChanged(errorState)*/
+        verify(observer).onChanged(errorState)
     }
 
     @Test
     fun `success get data tv shows`(){
-        /*val result = MutableLiveData<Result<List<TvShowsEntity>>>()
-        result.value = Result.Success(data = dummyTv)
+        val successState = Result.Success(data = pagedList)
 
-        val successState = Result.Success(data = dummyTv)
+        `when`(successState.data.size).thenReturn(5)
+
+        val result = MutableLiveData<Result<PagedList<TvShowsEntity>>>()
+        result.value = successState
 
         `when`(repository.getDiscoverTv()).thenReturn(result)
         val tvShows = viewModel.getListTvShows().value
-        val listData = tvShows as Result.Success<List<TvShowsEntity>>
+        val listData = tvShows as Result.Success<PagedList<TvShowsEntity>>
         verify(repository).getDiscoverTv()
         assertNotNull(tvShows)
-        assertEquals(10, listData.data.size)
+        assertEquals(5, listData.data.size)
 
         viewModel.getListTvShows().observeForever(observer)
-        verify(observer).onChanged(successState)*/
+        verify(observer).onChanged(successState)
     }
 }

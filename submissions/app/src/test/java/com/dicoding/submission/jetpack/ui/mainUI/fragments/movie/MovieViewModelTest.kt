@@ -3,9 +3,9 @@ package com.dicoding.submission.jetpack.ui.mainUI.fragments.movie
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.dicoding.submission.jetpack.data.dataSource.FilmRepository
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
-import com.dicoding.submission.jetpack.utils.DataDummy
 import com.dicoding.submission.jetpack.utils.Result
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -31,7 +31,8 @@ class MovieViewModelTest {
     @Mock
     private lateinit var observer: Observer<Result<List<MoviesEntity>>>
 
-    private val dummyMovie = DataDummy.generateMovieData()
+    @Mock
+    private lateinit var pagedList: PagedList<MoviesEntity>
 
     @Before
     fun setUp() {
@@ -40,7 +41,7 @@ class MovieViewModelTest {
 
     @Test
     fun `loading get data movie`(){
-        /*val result = MutableLiveData<Result<List<MoviesEntity>>>()
+        val result = MutableLiveData<Result<PagedList<MoviesEntity>>>()
         result.value = Result.Loading(data = null)
 
         val loadingState = Result.Loading<List<MoviesEntity>>(data = null)
@@ -52,12 +53,12 @@ class MovieViewModelTest {
         assertEquals(loadingState, movies)
 
         viewModel.getMovie().observeForever(observer)
-        verify(observer).onChanged(loadingState)*/
+        verify(observer).onChanged(loadingState)
     }
 
     @Test
     fun `error get data movie`(){
-        /*val result = MutableLiveData<Result<List<MoviesEntity>>>()
+        val result = MutableLiveData<Result<PagedList<MoviesEntity>>>()
         result.value = Result.Error(data = null, message = "Something Error")
 
         val errorState = Result.Error<List<MoviesEntity>>(data = null, message = "Something Error")
@@ -68,24 +69,26 @@ class MovieViewModelTest {
         assertEquals(errorState, movies)
 
         viewModel.getMovie().observeForever(observer)
-        verify(observer).onChanged(errorState)*/
+        verify(observer).onChanged(errorState)
     }
 
     @Test
     fun `success get data movie test`(){
-        /*val result = MutableLiveData<Result<List<MoviesEntity>>>()
-        result.value = Result.Success(data = dummyMovie)
+        val successState = Result.Success(data = pagedList)
 
-        val successState = Result.Success(data = dummyMovie)
+        `when`(successState.data.size).thenReturn(5)
+
+        val result = MutableLiveData<Result<PagedList<MoviesEntity>>>()
+        result.value = successState
 
         `when`(repository.getDiscoverMovie()).thenReturn(result)
         val movies = viewModel.getMovie().value
-        val listData = movies as Result.Success<List<MoviesEntity>>
+        val listData = movies as Result.Success<PagedList<MoviesEntity>>
         verify(repository).getDiscoverMovie()
         assertNotNull(movies)
-        assertEquals(10, listData.data.size)
+        assertEquals(5, listData.data.size)
 
         viewModel.getMovie().observeForever(observer)
-        verify(observer).onChanged(successState)*/
+        verify(observer).onChanged(successState)
     }
 }
