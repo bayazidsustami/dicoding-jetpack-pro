@@ -8,6 +8,7 @@ import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.t
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.BaseListResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.ResultsItemTv
 import com.dicoding.submission.jetpack.network.ApiService
+import com.dicoding.submission.jetpack.utils.EspressoIdlingResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
@@ -15,6 +16,7 @@ class TvShowDataSourceImpl constructor(
     private val apiService: ApiService
 ): RemoteDataSource.TvShowDataSource {
     override suspend fun getDiscoverTv(): LiveData<ApiResult<BaseListResponse<ResultsItemTv>>> {
+        EspressoIdlingResource.increment()
         val results = MutableLiveData<ApiResult<BaseListResponse<ResultsItemTv>>>()
         flow {
             val request = apiService.getDiscoverTv()
@@ -24,10 +26,12 @@ class TvShowDataSourceImpl constructor(
         }.collect {
             results.postValue(ApiResult.Success(data = it))
         }
+        EspressoIdlingResource.decrement()
         return results
     }
 
     override suspend fun getDetailTv(idTv: String): LiveData<ApiResult<DetailTvShowResponse>> {
+        EspressoIdlingResource.increment()
        val results = MutableLiveData<ApiResult<DetailTvShowResponse>>()
         flow {
             val request = apiService.getDetailTv(idTv)
@@ -37,6 +41,7 @@ class TvShowDataSourceImpl constructor(
         }.collect {
             results.postValue(ApiResult.Success(data = it))
         }
+        EspressoIdlingResource.decrement()
         return results
     }
 }

@@ -8,6 +8,7 @@ import com.dicoding.submission.jetpack.data.dataSource.remote.response.details.m
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.BaseListResponse
 import com.dicoding.submission.jetpack.data.dataSource.remote.response.list.ResultsItemMovie
 import com.dicoding.submission.jetpack.network.ApiService
+import com.dicoding.submission.jetpack.utils.EspressoIdlingResource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -19,6 +20,7 @@ class FilmDataSourceImpl  constructor(
 ): RemoteDataSource.FilmDataSource {
     override suspend fun getDiscoverFilm(): LiveData<ApiResult<BaseListResponse<ResultsItemMovie>>> {
         val results = MutableLiveData<ApiResult<BaseListResponse<ResultsItemMovie>>>()
+        EspressoIdlingResource.increment()
         flow {
             val request = apiService.getDiscoverMovie()
             emit(request)
@@ -27,10 +29,12 @@ class FilmDataSourceImpl  constructor(
         }.collect {
             results.postValue(ApiResult.Success(data = it))
         }
+        EspressoIdlingResource.decrement()
         return results
     }
 
     override suspend fun getDetailFilm(idMovie: String): LiveData<ApiResult<DetailMovieResponse>> {
+        EspressoIdlingResource.increment()
         val results = MutableLiveData<ApiResult<DetailMovieResponse>>()
         flow {
             val request = apiService.getDetailMovie(idMovie)
@@ -40,6 +44,7 @@ class FilmDataSourceImpl  constructor(
         }.collect {
             results.postValue(ApiResult.Success(data = it))
         }
+        EspressoIdlingResource.decrement()
         return results
     }
 }
