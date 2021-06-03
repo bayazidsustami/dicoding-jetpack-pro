@@ -23,7 +23,7 @@ class MainActivityTest{
     private val detailMovie = DataDummy.generateDetailMovie()[0]
 
     private val listTv = DataDummy.generateListTvShow()
-    private val detailTvShow = DataDummy.generateDetailTvShow()[2]
+    private val detailTvShow = DataDummy.generateDetailTvShow()[7]
 
     @Before
     fun setup(){
@@ -52,7 +52,7 @@ class MainActivityTest{
     @Test
     fun loadMovieDetailTest(){
         onView(withId(R.id.rvMovieList)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
+        onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(4, click()))
         onView(withId(R.id.viewPoster)).check(matches(isDisplayed()))
         onView(withId(R.id.tvStatus)).check(matches(withText(detailMovie.status)))
         onView(withId(R.id.tvDescription)).check(matches(isDisplayed()))
@@ -66,7 +66,7 @@ class MainActivityTest{
     fun loadTvShowDetailTest(){
         onView(withText(R.string.tvShow)).perform(click())
         onView(withId(R.id.rvTvShowList)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click()))
+        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.viewPoster)).check(matches(isDisplayed()))
         onView(withId(R.id.tvStatus)).check(matches(withText(detailTvShow.status)))
         onView(withId(R.id.tvEpisode)).check(matches(withText(detailTvShow.episodeCount)))
@@ -80,7 +80,7 @@ class MainActivityTest{
     @Test
     fun openFavoriteMovieListTest(){
         onView(withId(R.id.rvMovieList)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
+        onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(4, click()))
         onView(withId(R.id.viewPoster)).check(matches(isDisplayed()))
         onView(withId(R.id.tvStatus)).check(matches(withText(detailMovie.status)))
         onView(withId(R.id.tvDescription)).check(matches(isDisplayed()))
@@ -107,7 +107,7 @@ class MainActivityTest{
     fun openFavoriteTvShowListTest(){
         onView(withText(R.string.tvShow)).perform(click())
         onView(withId(R.id.rvTvShowList)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click()))
+        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.viewPoster)).check(matches(isDisplayed()))
         onView(withId(R.id.tvStatus)).check(matches(withText(detailTvShow.status)))
         onView(withId(R.id.tvEpisode)).check(matches(withText(detailTvShow.episodeCount)))

@@ -360,7 +360,7 @@ object DataDummy {
             "Lucifer",
             "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape.",
             "Returning Series",
-            "10"
+            "93"
         ))
         detailTvShow.add(
             DetailTvShowsEntity(
