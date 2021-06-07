@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.dicoding.submission.jetpack.data.dataSource.TvShowRepository
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.utils.DataDummy
+import com.dicoding.submission.jetpack.utils.LiveDataTestUtils
 import com.dicoding.submission.jetpack.utils.Result
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -43,35 +44,36 @@ class DetailTvShowViewModelTest {
 
     @Test
     fun `loading getDetail tvShow`(){
-        val result = MutableLiveData<Result<DetailTvShowsEntity>>()
-        result.value = Result.Loading(data = null)
-
         val loadingState = Result.Loading(data = null)
 
+        val result = MutableLiveData<Result<DetailTvShowsEntity>>()
+        result.value = loadingState
+
         `when`(repository.getDetailTv(tvId)).thenReturn(result)
-        val details = viewModel.getDetailTvShow().value
+
+        val details = LiveDataTestUtils.getValue(viewModel.tvDetail)
         verify(repository).getDetailTv(tvId)
+
         assertNotNull(details)
         assertEquals(loadingState, details)
 
-        viewModel.getDetailTvShow().observeForever(observer)
+        viewModel.tvDetail.observeForever(observer)
         verify(observer).onChanged(loadingState)
     }
 
     @Test
     fun `error getDetail tvShow`(){
-        val result = MutableLiveData<Result<DetailTvShowsEntity>>()
-        result.value = Result.Error(data = null, message = "Error")
-
         val errorState = Result.Error(data = null, message = "Error")
+        val result = MutableLiveData<Result<DetailTvShowsEntity>>()
+        result.value = errorState
 
         `when`(repository.getDetailTv(tvId)).thenReturn(result)
-        val details = viewModel.getDetailTvShow().value
+        val details = LiveDataTestUtils.getValue(viewModel.tvDetail)
         verify(repository).getDetailTv(tvId)
         assertNotNull(details)
         assertEquals(errorState, details)
 
-        viewModel.getDetailTvShow().observeForever(observer)
+        viewModel.tvDetail.observeForever(observer)
         verify(observer).onChanged(errorState)
     }
 
@@ -85,7 +87,7 @@ class DetailTvShowViewModelTest {
         val successState = Result.Success(data = tvShow)
 
         `when`(repository.getDetailTv(tvId)).thenReturn(result)
-        val detailData = viewModel.getDetailTvShow().value
+        val detailData = LiveDataTestUtils.getValue(viewModel.tvDetail)
         val details = detailData as Result.Success<DetailTvShowsEntity>
 
         assertNotNull(details)
@@ -97,7 +99,7 @@ class DetailTvShowViewModelTest {
         assertEquals(tvShow.title, details.data.title)
         assertEquals(tvShow.status, details.data.status)
 
-        viewModel.getDetailTvShow().observeForever(observer)
+        viewModel.tvDetail.observeForever(observer)
         verify(observer).onChanged(successState)
     }
 }

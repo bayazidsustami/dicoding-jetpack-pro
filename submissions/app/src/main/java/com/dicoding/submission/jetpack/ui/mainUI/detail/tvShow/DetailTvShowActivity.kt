@@ -1,7 +1,10 @@
 package com.dicoding.submission.jetpack.ui.mainUI.detail.tvShow
 
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.dicoding.submission.jetpack.R
 import com.dicoding.submission.jetpack.data.tvShows.DetailTvShowsEntity
 import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.databinding.ActivityDetailTvShowBinding
@@ -14,9 +17,12 @@ class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
 ){
     private val viewModel: DetailTvShowViewModel by viewModel()
 
+    private lateinit var tvShowsEntity: TvShowsEntity
+
     override fun initializeView(bind: ActivityDetailTvShowBinding) {
         val intent = intent.getParcelableExtra<TvShowsEntity>(EXTRA_TV_SHOW)
         if (intent != null){
+            tvShowsEntity = intent
             viewModel.setSelectedTvShow(intent.id)
 
             supportActionBar?.run {
@@ -24,7 +30,7 @@ class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
                 setDisplayHomeAsUpEnabled(true)
             }
 
-            viewModel.getDetailTvShow().observe(this){result ->
+            viewModel.tvDetail.observe(this){result ->
                 when(result){
                     is Result.Loading -> {
                         bind.progressBar.visible()
@@ -67,6 +73,21 @@ class DetailTvShowActivity : BaseActivity<ActivityDetailTvShowBinding>(
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_is_favorite, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.is_favorite){
+            val isFavorite = !tvShowsEntity.isFavorite
+            viewModel.setFavorite(tvShowsEntity, isFavorite)
+            true
+        } else{
+            super.onOptionsItemSelected(item)
+        }
     }
 
     companion object{

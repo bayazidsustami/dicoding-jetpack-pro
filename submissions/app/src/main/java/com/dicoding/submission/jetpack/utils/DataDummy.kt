@@ -197,70 +197,80 @@ object DataDummy {
             TvShowsEntity(
                 "88396",
                 "$BASE_POSTER_PATH/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
-                "The Falcon and the Winter Soldier"
+                "The Falcon and the Winter Soldier",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "95557",
                 "$BASE_POSTER_PATH/yDWJYRAwMNKbIYT8ZB33qy84uzO.jpg",
-                "Invincible"
+                "Invincible",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "71712",
                 "$BASE_POSTER_PATH/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
-                "The Good Doctor"
+                "The Good Doctor",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "60735",
                 "$BASE_POSTER_PATH/lJA2RCMfsWoskqlQhXPSLFQGXEJ.jpg",
-                "The Flash"
+                "The Flash",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "79008",
                 "$BASE_POSTER_PATH/34FaY8qpjBAVysSfrJ1l7nrAQaD.jpg",
-                "Luis Miguel: La Serie"
+                "Luis Miguel: La Serie",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "1416",
                 "$BASE_POSTER_PATH/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
-                "Grey's Anatomy"
+                "Grey's Anatomy",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "120587",
                 "$BASE_POSTER_PATH/Q1ZYG3kDS8iVIHOYOJ9NQmV0q7.jpg",
-                "Haunted: Latin America"
+                "Haunted: Latin America",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "63174",
                 "$BASE_POSTER_PATH/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg",
-                "Lucifer"
+                "Lucifer",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "69050",
                 "$BASE_POSTER_PATH/wRbjVBdDo5qHAEOVYoMWpM58FSA.jpg",
-                "Riverdale"
+                "Riverdale",
+                false
             )
         )
         tvShows.add(
             TvShowsEntity(
                 "65820",
                 "$BASE_POSTER_PATH/r8ODGmfNbZQlNhiJl2xQENE2jsk.jpg",
-                "Van Helsing"
+                "Van Helsing",
+                false
             )
         )
         return tvShows
@@ -350,7 +360,7 @@ object DataDummy {
             "Lucifer",
             "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape.",
             "Returning Series",
-            "10"
+            "93"
         ))
         detailTvShow.add(
             DetailTvShowsEntity(

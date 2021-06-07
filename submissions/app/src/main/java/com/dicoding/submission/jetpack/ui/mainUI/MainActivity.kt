@@ -1,5 +1,8 @@
 package com.dicoding.submission.jetpack.ui.mainUI
 
+import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.submission.jetpack.R
 import com.dicoding.submission.jetpack.databinding.ActivityMainBinding
@@ -24,5 +27,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 1 -> tab.text = resources.getString(R.string.tvShow)
             }
         }.attach()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_favorite, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.navigation_favorite){
+            val intent = Intent(this, FavoriteActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

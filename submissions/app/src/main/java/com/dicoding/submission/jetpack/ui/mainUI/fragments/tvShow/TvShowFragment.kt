@@ -3,10 +3,8 @@ package com.dicoding.submission.jetpack.ui.mainUI.fragments.tvShow
 import android.content.Intent
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dicoding.submission.jetpack.data.tvShows.TvShowsEntity
 import com.dicoding.submission.jetpack.databinding.FragmentTvBinding
 import com.dicoding.submission.jetpack.ui.baseUI.BaseFragment
-import com.dicoding.submission.jetpack.ui.mainUI.OnItemClickListener
 import com.dicoding.submission.jetpack.ui.mainUI.detail.tvShow.DetailTvShowActivity
 import com.dicoding.submission.jetpack.utils.Result
 import com.dicoding.submission.jetpack.utils.gone
@@ -38,18 +36,16 @@ class TvShowFragment: BaseFragment<FragmentTvBinding>(
                 }
                 is Result.Success -> {
                     bind.progressBar.gone()
-                    tvAdapter.setData(result.data)
+                    tvAdapter.submitList(result.data)
                 }
             }
         }
 
-        tvAdapter.setOnItemClickListener(object : OnItemClickListener<TvShowsEntity>{
-            override fun onClick(data: TvShowsEntity) {
-                val intent = Intent(requireContext(), DetailTvShowActivity::class.java).apply {
-                    putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, data)
-                }
-                startActivity(intent)
+        tvAdapter.onItemSelected = {data ->
+            val intent = Intent(requireContext(), DetailTvShowActivity::class.java).apply {
+                putExtra(DetailTvShowActivity.EXTRA_TV_SHOW, data)
             }
-        })
+            startActivity(intent)
+        }
     }
 }

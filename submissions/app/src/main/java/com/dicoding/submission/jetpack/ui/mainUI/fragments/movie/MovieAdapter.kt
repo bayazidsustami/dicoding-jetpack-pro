@@ -1,26 +1,17 @@
 package com.dicoding.submission.jetpack.ui.mainUI.fragments.movie
 
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.submission.jetpack.data.movie.MoviesEntity
 import com.dicoding.submission.jetpack.databinding.ItemListMovieBinding
-import com.dicoding.submission.jetpack.ui.mainUI.OnItemClickListener
 import com.dicoding.submission.jetpack.utils.inflating
 import com.dicoding.submission.jetpack.utils.loadImage
 
-class MovieAdapter: RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-    private var list: List<MoviesEntity> = listOf()
+class MovieAdapter: PagedListAdapter<MoviesEntity, MovieAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private lateinit var onItemClickListener: OnItemClickListener<MoviesEntity>
-
-    fun setOnItemCLickListener(onItemClickListener: OnItemClickListener<MoviesEntity>){
-        this.onItemClickListener = onItemClickListener
-    }
-
-    fun setData(list: List<MoviesEntity>){
-        this.list = list
-        notifyDataSetChanged()
-    }
+    var onItemSelected: ((MoviesEntity) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -29,10 +20,11 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        val movies = getItem(position)
+        if (movies != null){
+            holder.bind(movies)
+        }
     }
-
-    override fun getItemCount(): Int = list.size
 
     inner class ViewHolder(
             private val binding: ItemListMovieBinding
@@ -41,7 +33,19 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
             binding.imgPoster.loadImage(itemView.context, data.posterPath)
             binding.tvTitle.text = data.title
             binding.root.setOnClickListener {
-                onItemClickListener.onClick(data)
+                onItemSelected?.invoke(data)
+            }
+        }
+    }
+
+    companion object{
+        private val DIFF_CALLBACK = object: DiffUtil.ItemCallback<MoviesEntity>(){
+            override fun areItemsTheSame(oldItem: MoviesEntity, newItem: MoviesEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: MoviesEntity, newItem: MoviesEntity): Boolean {
+                return oldItem == newItem
             }
         }
     }

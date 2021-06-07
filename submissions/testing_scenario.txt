@@ -27,24 +27,40 @@
  - memastikan ketika dapat mengembalikan pesan error
  - memastikan state dapat mengembalikan success 
  - memastikan data detailTvShow sesuai dengan yang diharapkan
-5. FilmRepositoryTest
- 5.1 get all movies
- - memberikan nilai responseMovie dari data source,
+5. MovieFavoriteViewModelTest
+ - memastikan objek yang dikembalikan tidak null
+ - memastikan jumlah data movieFavorite sesuai dengan yang diharapkan
+
+6. TvShowFavoriteViewModelTest
+ - memastikan objek yang dikembalikan tidak null
+ - memastikan jumlah data tvShowFavorite sesuai dengan yang diharapkan
+
+7. FilmRepositoryTest
+ 7.1 get all movies
+ - memberikan nilai dari data source,
  - memastikan hasil tidak null,
- - memastikan jumlah response movie dengan yang diharapkan
- 5.2 get detail movies
- - memberikan nilai responseMovie dari data source,
+ - memastikan jumlah movie entity sesuai dengan yang diharapkan
+ 7.2 get detail movies
+ - memberikan nilai dari data source,
  - memastikan hasil tidak null,
- - memastikan data responseMovie sesuai dengan yang diharapkan
-6. TvShowRepositoryTest
- 5.1 get all tvShows
- - memberikan nilai responseTvShow dari data source,
+ - memastikan data detailMovieEntity sesuai dengan yang diharapkan
+ 7.3 get favorite movie
+ - memberikan nilai dari data source
+ - memastikan hasil tidak null
+ - memastikan data movie entity sesuai denga yang diharapkan
+8. TvShowRepositoryTest
+ 8.1 get all tvShows
+ - memberikan nilai dari data source,
  - memastikan hasil tidak null,
- - memastikan jumlah responseTvShow sesuai dengan yang diharapkan
- 5.2 get detail tvShows
- - memberikan nilai responseTvShow dari data source,
+ - memastikan jumlah tvShowEntity sesuai dengan yang diharapkan
+ 8.2 get detail tvShows
+ - memberikan nilai dari data source,
  - memastikan hasil tidak null,
- - memastikan data responseTvShow sesuai dengan yang diharapkan
+ - memastikan data detailTvShowEntity sesuai dengan yang diharapkan
+ 8.3 get favorite tvShows
+ - memberikan nilai dari data source,
+ - memastikan hasil tidak null,
+ - memastikan jumlah tvShowEntity sesuai dengan yang diharapkan
 
 -->instrument testing
 1. MainActivityTest
@@ -59,21 +75,45 @@
    - memastikan rvMovieList Tampil
    - memberikan aksi klik pada item pertama rvMovieList
    - memastikan viewPoster tampil
-   - memastikan tvStatus sesuai dengan dataDetail yang diharapkan
    - memastikan tvDescription tampil
-   - memastikan tvDescription sesuai dengan dataDetail yang diharapakan
    - memastikan tvHomePage tampil
-   - memastikan tvHomePage sesuai denga dataDetail yang diharapkan
    - memberikan aksi klik pada tvHomePage
  - loadTvShowDetailTest
    - klik tabLayout dengant text "Tv Shows"
    - memastikan rvTvShowList tampil
    - memberikan aksi klik pada item pertama rvTvShowList
    - memastikan viewPoster tampil
-   - memastikan tvStatus sesuai dengan dataDetail yang diharapkan
-   - memastikan tvEpisode sesuai dengan dataDetail yang diharapkan
    - memastikan tvDescription tampil
-   - memastikan tvDescription sesuai dengan dataDetail yang diharapkan
    - memastikan tvHomePage tampil
-   - memastikan tvHomePage sesuai denga dataDetail yang diharapkan
    - memberikan aksi klik pada tvHomePage
+ - openFavoriteMovieListTest
+   - memastikan rvMovieList Tampil
+   - memberikan aksi klik pada item pertama rvMovieList
+   - memastikan viewPoster tampil
+   - memastikan tvDescription tampil
+   - memastikan tvHomePage tampil
+   - memberikan aksi klik pada is favorite
+   - memberikan aksi klik pada navigationUp
+   - memberikan aksi klik pada navigationFavorite
+   - memberikan aksi klik pada item pertama rvMovieList
+   - memastikan viewPoster tampil
+   - memastikan tvDescription tampil
+   - memastikan tvHomePage tampil
+   - memberikan aksi pada homepage
+ - openFavoriteTvShowListTest
+   - klik tabLayout dengant text "Tv Shows"
+   - memastikan rvTvShowList tampil
+   - memberikan aksi klik pada item pertama rvTvShowList
+   - memastikan viewPoster tampil
+   - memastikan tvDescription tampil
+   - memastikan tvHomePage tampil
+   - memberikan aksi klik pada is favorite
+   - memberikan aksi klik pada navigationUp
+   - memberikan aksi klik pada navigationFavorite
+   - klik tabLayout dengant text "Tv Shows"
+   - memastikan rvTvShowList tampil
+   - memberikan aksi klik pada item pertama rvTvShowList
+   - memastikan viewPoster tampil
+   - memastikan tvDescription tampil
+   - memastikan tvHomePage tampil
+   - memberikan aksi pada tvHomePage

@@ -4,6 +4,7 @@ import android.app.Application
 import com.dicoding.submission.jetpack.di.ApplicationModule.adapterModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.coroutineScopeModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.dataSourceModule
+import com.dicoding.submission.jetpack.di.ApplicationModule.databaseModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.networkModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.repositoryModule
 import com.dicoding.submission.jetpack.di.ApplicationModule.viewModelModule
@@ -24,6 +25,7 @@ class FilmExplorerApp: Application() {
                 adapterModule,
                 viewModelModule,
                 repositoryModule,
+                databaseModule,
                 coroutineScopeModule,
                 networkModule,
                 dataSourceModule
