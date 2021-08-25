@@ -33,7 +33,9 @@ jobs:
           destination: reports
       - run:
           name: Run Tests
-          command: submissions/gradlew lint test
+          command: |
+            cd submissions/
+            ./gradlew lint test
       - store_test_results:
           path: submissions/app/build/test-results
       - store_artifacts:  
