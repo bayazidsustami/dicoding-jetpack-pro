@@ -15,7 +15,9 @@ jobs:
           command: sudo chmod +x submissions/gradlew
       - run:
           name: Download Dependencies
-          command: ./gradlew androidDependencies
+          command: |
+            cd submissions/
+            ./gradlew androidDependencies
       - save_cache:
           key: 'android-orb-v1-{{ epoch }}'
           paths:
@@ -23,7 +25,9 @@ jobs:
             - ~/.android/cache
       - run:
           name: Run Build
-          command: submissions/gradlew build
+          command: |
+            cd submissions/
+            ./gradlew build
       - store_artifacts: 
           path: submissions/app/build/reports
           destination: reports
