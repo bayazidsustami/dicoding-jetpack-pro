@@ -56,9 +56,9 @@ class TvShowRepositoryTest{
 
     @Test
     fun `get all tvShows`() = testCoroutineRule.runBlockingTest {
-        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvShowsEntity>
+        val dataSourceFactory = mock(DataSource.Factory::class.java)
 
-        `when`(localDataSource.getListTv()).thenReturn(dataSourceFactory)
+        `when`(localDataSource.getListTv()).thenReturn(dataSourceFactory as DataSource.Factory<Int, TvShowsEntity>?)
         repository.getDiscoverTv()
 
         val data = Result.Success(data = PagedListUtils.mockPagedList(DataDummy.generateListTvShow()))
@@ -90,9 +90,9 @@ class TvShowRepositoryTest{
 
     @Test
     fun `get favorite tv Show`() = testCoroutineRule.runBlockingTest {
-        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvShowsEntity>
+        val dataSourceFactory = mock(DataSource.Factory::class.java)
 
-        `when`(localDataSource.getListFavoriteTv()).thenReturn(dataSourceFactory)
+        `when`(localDataSource.getListFavoriteTv()).thenReturn(dataSourceFactory as DataSource.Factory<Int, TvShowsEntity>?)
         repository.getFavoriteTvShow()
 
         val data = PagedListUtils.mockPagedList(DataDummy.generateListTvShow())

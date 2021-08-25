@@ -52,9 +52,9 @@ class FilmRepositoryTest{
 
     @Test
     fun `get all movies`() = testCoroutineRule.runBlockingTest {
-        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MoviesEntity>
+        val dataSourceFactory = mock(DataSource.Factory::class.java)
 
-        `when`(localDataSource.getListFilm()).thenReturn(dataSourceFactory)
+        `when`(localDataSource.getListFilm()).thenReturn(dataSourceFactory as DataSource.Factory<Int, MoviesEntity>?)
         repository.getDiscoverMovie()
 
         val dataMovie = Result.Success(data = PagedListUtils.mockPagedList(DataDummy.generateMovieData()))
@@ -83,9 +83,9 @@ class FilmRepositoryTest{
 
     @Test
     fun `get favorite movie test`() = testCoroutineRule.runBlockingTest {
-        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MoviesEntity>
+        val dataSourceFactory = mock(DataSource.Factory::class.java)
 
-        `when`(localDataSource.getListFilmFavorite()).thenReturn(dataSourceFactory)
+        `when`(localDataSource.getListFilmFavorite()).thenReturn(dataSourceFactory as DataSource.Factory<Int, MoviesEntity>?)
         repository.getFavoriteMovie()
 
         val dataMovie = PagedListUtils.mockPagedList(DataDummy.generateMovieData())
