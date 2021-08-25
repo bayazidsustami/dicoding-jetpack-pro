@@ -54,6 +54,7 @@ class TvShowRepositoryTest{
         repository = FakeTvShowRepository(remoteDataSource, localDataSource, coroutineScope)
     }
 
+    @Suppress("UNCHECKED_CAST")
     @Test
     fun `get all tvShows`() = testCoroutineRule.runBlockingTest {
         val dataSourceFactory = mock(DataSource.Factory::class.java)
@@ -88,6 +89,7 @@ class TvShowRepositoryTest{
         assertEquals(dataDummy.overview, result.data.overview)
     }
 
+    @Suppress("UNCHECKED_CAST")
     @Test
     fun `get favorite tv Show`() = testCoroutineRule.runBlockingTest {
         val dataSourceFactory = mock(DataSource.Factory::class.java)

@@ -50,6 +50,7 @@ class FilmRepositoryTest{
         repository = FakeFilmRepository(remoteDataSource,localDataSource, coroutineScope)
     }
 
+    @Suppress("UNCHECKED_CAST")
     @Test
     fun `get all movies`() = testCoroutineRule.runBlockingTest {
         val dataSourceFactory = mock(DataSource.Factory::class.java)
@@ -81,6 +82,7 @@ class FilmRepositoryTest{
         assertEquals(DataDummy.generateDetailMovie()[0].status, result.data.status)
     }
 
+    @Suppress("UNCHECKED_CAST")
     @Test
     fun `get favorite movie test`() = testCoroutineRule.runBlockingTest {
         val dataSourceFactory = mock(DataSource.Factory::class.java)
